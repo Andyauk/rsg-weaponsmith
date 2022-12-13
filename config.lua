@@ -1,5 +1,8 @@
 Config = {}
 
+-- debug
+Config.Debug = false
+
 -- settings
 Config.JobRequired = 'weaponsmith'
 Config.StorageMaxWeight = 4000000

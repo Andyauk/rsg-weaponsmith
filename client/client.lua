@@ -101,16 +101,17 @@ RegisterNetEvent('rsg-weaponsmith:client:partsmenu', function()
             isMenuHeader = true,
         },
     }
+    local item = {}
     for k, v in pairs(Config.WeaponPartsCrafting) do
         partsMenu[#partsMenu + 1] = {
             header = v.lable,
             txt = text,
             icon = 'fas fa-cog',
             params = {
-                event = 'rsg-goldsmelt:client:checkinggolditems',
+                event = 'rsg-weaponsmith:client:partscheckitems',
                 args = {
                     name = v.name,
-                    lable = v.lable,
+                    item = k,
                     crafttime = v.crafttime,
                     receive = v.receive
                 }
@@ -167,16 +168,17 @@ RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
             isMenuHeader = true,
         },
     }
+    local item = {}
     for k, v in pairs(Config.RevloverCrafting) do
         revloverMenu[#revloverMenu + 1] = {
             header = v.lable,
             txt = '',
             icon = 'fas fa-cog',
             params = {
-                event = 'rsg-goldsmelt:client:checkinggolditems',
-                args = {
+                event = 'rsg-weaponsmith:client:checkrevloveritems',
+                args = {                
                     name = v.name,
-                    lable = v.lable,
+                    item = k,
                     crafttime = v.crafttime,
                     receive = v.receive
                 }
@@ -191,6 +193,70 @@ RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
         }
     }
     exports['qr-menu']:openMenu(revloverMenu)
+end)
+
+------------------------------------------------------------------------------------------------------
+
+-- parts crafting : check player has the items
+RegisterNetEvent('rsg-weaponsmith:client:partscheckitems', function(data)
+    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    if (hasRequired) then
+        if Config.Debug == true then
+            print("passed")
+        end
+        TriggerEvent('rsg-weaponsmith:client:startpartscrafting', data.name, data.item, tonumber(data.crafttime), data.receive)
+    else
+        if Config.Debug == true then
+            print("failed")
+        end
+        return
+    end
+    end, Config.WeaponPartsCrafting[data.item].craftitems)
+end)
+
+-- revovler crafting : check player has the items
+RegisterNetEvent('rsg-weaponsmith:client:checkrevloveritems', function(data)
+    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    if (hasRequired) then
+        if Config.Debug == true then
+            print("passed")
+        end
+        TriggerEvent('rsg-weaponsmith:client:startrevlovercrafting', data.name, data.item, tonumber(data.crafttime), data.receive)
+    else
+        if Config.Debug == true then
+            print("failed")
+        end
+        return
+    end
+    end, Config.RevloverCrafting[data.item].craftitems)
+end)
+
+------------------------------------------------------------------------------------------------------
+
+-- start parts crafting
+RegisterNetEvent('rsg-weaponsmith:client:startpartscrafting', function(name, item, crafttime, receive)
+    local craftitems = Config.WeaponPartsCrafting[item].craftitems
+    QRCore.Functions.Progressbar('craft-parts', 'Crafting part '..name, crafttime, false, true, {
+        disableMovement = true,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', craftitems, receive)
+    end)
+end)
+
+-- start revlover crafting
+RegisterNetEvent('rsg-weaponsmith:client:startrevlovercrafting', function(name, item, crafttime, receive)
+    local craftitems = Config.RevloverCrafting[item].craftitems
+    QRCore.Functions.Progressbar('craft-parts', 'Crafting revlover '..name, crafttime, false, true, {
+        disableMovement = true,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', craftitems, receive)
+    end)
 end)
 
 -----------------------------------------------------------------------------------
