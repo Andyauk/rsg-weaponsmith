@@ -111,6 +111,7 @@ RegisterNetEvent('rsg-weaponsmith:client:partsmenu', function()
                 event = 'rsg-weaponsmith:client:partscheckitems',
                 args = {
                     name = v.name,
+                    lable = v.lable,
                     item = k,
                     crafttime = v.crafttime,
                     receive = v.receive
@@ -178,6 +179,7 @@ RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
                 event = 'rsg-weaponsmith:client:checkrevloveritems',
                 args = {                
                     name = v.name,
+                    lable = v.lable,
                     item = k,
                     crafttime = v.crafttime,
                     receive = v.receive
@@ -204,7 +206,7 @@ RegisterNetEvent('rsg-weaponsmith:client:partscheckitems', function(data)
         if Config.Debug == true then
             print("passed")
         end
-        TriggerEvent('rsg-weaponsmith:client:startpartscrafting', data.name, data.item, tonumber(data.crafttime), data.receive)
+        TriggerEvent('rsg-weaponsmith:client:startpartscrafting', data.name, data.lable, data.item, tonumber(data.crafttime), data.receive)
     else
         if Config.Debug == true then
             print("failed")
@@ -221,7 +223,7 @@ RegisterNetEvent('rsg-weaponsmith:client:checkrevloveritems', function(data)
         if Config.Debug == true then
             print("passed")
         end
-        TriggerEvent('rsg-weaponsmith:client:startrevlovercrafting', data.name, data.item, tonumber(data.crafttime), data.receive)
+        TriggerEvent('rsg-weaponsmith:client:startrevlovercrafting', data.name, data.lable, data.item, tonumber(data.crafttime), data.receive)
     else
         if Config.Debug == true then
             print("failed")
@@ -234,9 +236,9 @@ end)
 ------------------------------------------------------------------------------------------------------
 
 -- start parts crafting
-RegisterNetEvent('rsg-weaponsmith:client:startpartscrafting', function(name, item, crafttime, receive)
+RegisterNetEvent('rsg-weaponsmith:client:startpartscrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.WeaponPartsCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-parts', 'Crafting part '..name, crafttime, false, true, {
+    QRCore.Functions.Progressbar('craft-parts', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -247,9 +249,9 @@ RegisterNetEvent('rsg-weaponsmith:client:startpartscrafting', function(name, ite
 end)
 
 -- start revlover crafting
-RegisterNetEvent('rsg-weaponsmith:client:startrevlovercrafting', function(name, item, crafttime, receive)
+RegisterNetEvent('rsg-weaponsmith:client:startrevlovercrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.RevloverCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-parts', 'Crafting revlover '..name, crafttime, false, true, {
+    QRCore.Functions.Progressbar('craft-parts', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
