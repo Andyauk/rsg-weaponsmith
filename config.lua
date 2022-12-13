@@ -93,7 +93,7 @@ Config.WeaponPartsCrafting = {
     
 }
 
-Config.WeaponCrafting = {
+Config.RevloverCrafting = {
     
     -- gun crafting
     ['weapon_revolver_navy'] = {

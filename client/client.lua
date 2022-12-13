@@ -102,14 +102,10 @@ RegisterNetEvent('rsg-weaponsmith:client:partsmenu', function()
         },
     }
     for k, v in pairs(Config.WeaponPartsCrafting) do
-        local item = {}
-        local text = ""
-        for k, v in pairs(v.craftitems) do
-            text = text .. "- " .. QRCore.Shared.Items[v.item].label .. ": " .. v.amount .. "x <br>"
-        end
         partsMenu[#partsMenu + 1] = {
-            header = k,
+            header = v.lable,
             txt = text,
+            icon = 'fas fa-cog',
             params = {
                 event = 'rsg-goldsmelt:client:checkinggolditems',
                 args = {
@@ -160,6 +156,41 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
     else
         QRCore.Functions.Notify('you are not a Weaponsmith!', 'error')
     end
+end)
+
+-- revlover menu
+RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
+    revloverMenu = {}
+    revloverMenu = {
+        {
+            header = "Revolver Crafting",
+            isMenuHeader = true,
+        },
+    }
+    for k, v in pairs(Config.RevloverCrafting) do
+        revloverMenu[#revloverMenu + 1] = {
+            header = v.lable,
+            txt = '',
+            icon = 'fas fa-cog',
+            params = {
+                event = 'rsg-goldsmelt:client:checkinggolditems',
+                args = {
+                    name = v.name,
+                    lable = v.lable,
+                    crafttime = v.crafttime,
+                    receive = v.receive
+                }
+            }
+        }
+    end
+    revloverMenu[#revloverMenu + 1] = {
+        header = "<< Back",
+        txt = '',
+        params = {
+            event = 'rsg-weaponsmith:client:mainmenu',
+        }
+    }
+    exports['qr-menu']:openMenu(revloverMenu)
 end)
 
 -----------------------------------------------------------------------------------
