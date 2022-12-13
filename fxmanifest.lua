@@ -18,5 +18,6 @@ shared_scripts {
 }
 
 dependency 'qr-core'
+dependency 'qr-menu'
 
 lua54 'yes'

@@ -92,35 +92,43 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(location)
     end
 end)
 
--- weaponsmith part menu
+-- parts menu
 RegisterNetEvent('rsg-weaponsmith:client:partsmenu', function()
-    local job = QRCore.Functions.GetPlayerData().job.name
-    if job == Config.JobRequired then
-        exports['qr-menu']:openMenu({
-            {
-                header = 'Weapon Parts Crafting',
-                isMenuHeader = true,
-            },
-            {
-                header = "Weapon Parts Crafting",
-                txt = "",
-                icon = "fas fa-tools",
-                params = {
-                    event = 'rsg-weaponsmith:client:partsmenu',
-                    isServer = false,
+    partsMenu = {}
+    partsMenu = {
+        {
+            header = "Weapon Parts Crafting",
+            isMenuHeader = true,
+        },
+    }
+    for k, v in pairs(Config.WeaponPartsCrafting) do
+        local item = {}
+        local text = ""
+        for k, v in pairs(v.craftitems) do
+            text = text .. "- " .. QRCore.Shared.Items[v.item].label .. ": " .. v.amount .. "x <br>"
+        end
+        partsMenu[#partsMenu + 1] = {
+            header = k,
+            txt = text,
+            params = {
+                event = 'rsg-goldsmelt:client:checkinggolditems',
+                args = {
+                    name = v.name,
+                    lable = v.lable,
+                    crafttime = v.crafttime,
+                    receive = v.receive
                 }
-            },
-            {
-                header = "<< Back",
-                txt = '',
-                params = {
-                    event = 'rsg-weaponsmith:client:mainmenu',
-                }
-            },
-        })
-    else
-        QRCore.Functions.Notify('you are not a Weaponsmith!', 'error')
+            }
+        }
     end
+    partsMenu[#partsMenu + 1] = {
+        header = "<< Back",
+        txt = '',
+        params = {
+            event = 'rsg-weaponsmith:client:mainmenu',
+        }
+    }
+    exports['qr-menu']:openMenu(partsMenu)
 end)
 
 -- weaponsmith weapon menu
@@ -133,11 +141,11 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
                 isMenuHeader = true,
             },
             {
-                header = "Weapon Crafting",
+                header = "Revolver Crafting",
                 txt = "",
                 icon = "fas fa-tools",
                 params = {
-                    event = 'rsg-weaponsmith:client:partsmenu',
+                    event = 'rsg-weaponsmith:client:revlovermenu',
                     isServer = false,
                 }
             },
