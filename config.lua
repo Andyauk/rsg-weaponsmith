@@ -98,7 +98,7 @@ Config.WeaponPartsCrafting = {
 
 Config.RevloverCrafting = {
     
-    -- gun crafting
+    -- revlover crafting
     ['weapon_revolver_navy'] = {
         name = 'weapon_revolver_navy',
         lable = 'Navy Revolver',
@@ -114,4 +114,28 @@ Config.RevloverCrafting = {
         receive = 'weapon_revolver_navy'
     },
     
+}
+
+Config.PistolCrafting = {
+    
+    -- pistol crafting
+
+}
+
+Config.RepeaterCrafting = {
+    
+    -- repeater crafting
+
+}
+
+Config.RifleCrafting = {
+    
+    -- rifle crafting
+
+}
+
+Config.ShotgunCrafting = {
+    
+    -- shotgun crafting
+
 }

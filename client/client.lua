@@ -148,6 +148,42 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
                 }
             },
             {
+                header = "Pistol Crafting",
+                txt = "",
+                icon = "fas fa-tools",
+                params = {
+                    event = 'rsg-weaponsmith:client:pistolmenu',
+                    isServer = false,
+                }
+            },
+            {
+                header = "Repeater Crafting",
+                txt = "",
+                icon = "fas fa-tools",
+                params = {
+                    event = 'rsg-weaponsmith:client:repeatermenu',
+                    isServer = false,
+                }
+            },
+            {
+                header = "Rifle Crafting",
+                txt = "",
+                icon = "fas fa-tools",
+                params = {
+                    event = 'rsg-weaponsmith:client:riflemenu',
+                    isServer = false,
+                }
+            },
+            {
+                header = "Shotgun Crafting",
+                txt = "",
+                icon = "fas fa-tools",
+                params = {
+                    event = 'rsg-weaponsmith:client:shotgunmenu',
+                    isServer = false,
+                }
+            },
+            {
                 header = "<< Back",
                 txt = '',
                 params = {
@@ -197,6 +233,154 @@ RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
     exports['qr-menu']:openMenu(revloverMenu)
 end)
 
+-- pistol menu
+RegisterNetEvent('rsg-weaponsmith:client:pistolmenu', function()
+    pistolMenu = {}
+    pistolMenu = {
+        {
+            header = "Pistol Crafting",
+            isMenuHeader = true,
+        },
+    }
+    local item = {}
+    for k, v in pairs(Config.PistolCrafting) do
+        pistolMenu[#pistolMenu + 1] = {
+            header = v.lable,
+            txt = '',
+            icon = 'fas fa-cog',
+            params = {
+                event = 'rsg-weaponsmith:client:checkpistolitems',
+                args = {                
+                    name = v.name,
+                    lable = v.lable,
+                    item = k,
+                    crafttime = v.crafttime,
+                    receive = v.receive
+                }
+            }
+        }
+    end
+    pistolMenu[#pistolMenu + 1] = {
+        header = "<< Back",
+        txt = '',
+        params = {
+            event = 'rsg-weaponsmith:client:mainmenu',
+        }
+    }
+    exports['qr-menu']:openMenu(pistolMenu)
+end)
+
+-- repeater menu
+RegisterNetEvent('rsg-weaponsmith:client:repeatermenu', function()
+    repeaterMenu = {}
+    repeaterMenu = {
+        {
+            header = "Repeater Crafting",
+            isMenuHeader = true,
+        },
+    }
+    local item = {}
+    for k, v in pairs(Config.RepeaterCrafting) do
+        repeaterMenu[#repeaterMenu + 1] = {
+            header = v.lable,
+            txt = '',
+            icon = 'fas fa-cog',
+            params = {
+                event = 'rsg-weaponsmith:client:checkrepeateritems',
+                args = {                
+                    name = v.name,
+                    lable = v.lable,
+                    item = k,
+                    crafttime = v.crafttime,
+                    receive = v.receive
+                }
+            }
+        }
+    end
+    repeaterMenu[#repeaterMenu + 1] = {
+        header = "<< Back",
+        txt = '',
+        params = {
+            event = 'rsg-weaponsmith:client:mainmenu',
+        }
+    }
+    exports['qr-menu']:openMenu(repeaterMenu)
+end)
+
+-- rifle menu
+RegisterNetEvent('rsg-weaponsmith:client:riflemenu', function()
+    rifleMenu = {}
+    rifleMenu = {
+        {
+            header = "Rifle Crafting",
+            isMenuHeader = true,
+        },
+    }
+    local item = {}
+    for k, v in pairs(Config.RifleCrafting) do
+        rifleMenu[#rifleMenu + 1] = {
+            header = v.lable,
+            txt = '',
+            icon = 'fas fa-cog',
+            params = {
+                event = 'rsg-weaponsmith:client:checkrifleitems',
+                args = {                
+                    name = v.name,
+                    lable = v.lable,
+                    item = k,
+                    crafttime = v.crafttime,
+                    receive = v.receive
+                }
+            }
+        }
+    end
+    rifleMenu[#rifleMenu + 1] = {
+        header = "<< Back",
+        txt = '',
+        params = {
+            event = 'rsg-weaponsmith:client:mainmenu',
+        }
+    }
+    exports['qr-menu']:openMenu(rifleMenu)
+end)
+
+-- shotgun menu
+RegisterNetEvent('rsg-weaponsmith:client:shotgunmenu', function()
+    shotgunMenu = {}
+    shotgunMenu = {
+        {
+            header = "Shotgun Crafting",
+            isMenuHeader = true,
+        },
+    }
+    local item = {}
+    for k, v in pairs(Config.ShotgunCrafting) do
+        shotgunMenu[#shotgunMenu + 1] = {
+            header = v.lable,
+            txt = '',
+            icon = 'fas fa-cog',
+            params = {
+                event = 'rsg-weaponsmith:client:checkshotgunitems',
+                args = {                
+                    name = v.name,
+                    lable = v.lable,
+                    item = k,
+                    crafttime = v.crafttime,
+                    receive = v.receive
+                }
+            }
+        }
+    end
+    shotgunMenu[#shotgunMenu + 1] = {
+        header = "<< Back",
+        txt = '',
+        params = {
+            event = 'rsg-weaponsmith:client:mainmenu',
+        }
+    }
+    exports['qr-menu']:openMenu(shotgunMenu)
+end)
+
 ------------------------------------------------------------------------------------------------------
 
 -- parts crafting : check player has the items
@@ -233,6 +417,74 @@ RegisterNetEvent('rsg-weaponsmith:client:checkrevloveritems', function(data)
     end, Config.RevloverCrafting[data.item].craftitems)
 end)
 
+-- pistol crafting : check player has the items
+RegisterNetEvent('rsg-weaponsmith:client:checkpistolitems', function(data)
+    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    if (hasRequired) then
+        if Config.Debug == true then
+            print("passed")
+        end
+        TriggerEvent('rsg-weaponsmith:client:startrpistolcrafting', data.name, data.lable, data.item, tonumber(data.crafttime), data.receive)
+    else
+        if Config.Debug == true then
+            print("failed")
+        end
+        return
+    end
+    end, Config.PistolCrafting[data.item].craftitems)
+end)
+
+-- repeater crafting : check player has the items
+RegisterNetEvent('rsg-weaponsmith:client:checkrepeateritems', function(data)
+    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    if (hasRequired) then
+        if Config.Debug == true then
+            print("passed")
+        end
+        TriggerEvent('rsg-weaponsmith:client:startrepeatercrafting', data.name, data.lable, data.item, tonumber(data.crafttime), data.receive)
+    else
+        if Config.Debug == true then
+            print("failed")
+        end
+        return
+    end
+    end, Config.RepeaterCrafting[data.item].craftitems)
+end)
+
+-- rifle crafting : check player has the items
+RegisterNetEvent('rsg-weaponsmith:client:checkrifleitems', function(data)
+    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    if (hasRequired) then
+        if Config.Debug == true then
+            print("passed")
+        end
+        TriggerEvent('rsg-weaponsmith:client:startriflecrafting', data.name, data.lable, data.item, tonumber(data.crafttime), data.receive)
+    else
+        if Config.Debug == true then
+            print("failed")
+        end
+        return
+    end
+    end, Config.RifleCrafting[data.item].craftitems)
+end)
+
+-- shotgun crafting : check player has the items
+RegisterNetEvent('rsg-weaponsmith:client:checkshotgunitems', function(data)
+    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    if (hasRequired) then
+        if Config.Debug == true then
+            print("passed")
+        end
+        TriggerEvent('rsg-weaponsmith:client:startshotguncrafting', data.name, data.lable, data.item, tonumber(data.crafttime), data.receive)
+    else
+        if Config.Debug == true then
+            print("failed")
+        end
+        return
+    end
+    end, Config.ShotgunCrafting[data.item].craftitems)
+end)
+
 ------------------------------------------------------------------------------------------------------
 
 -- start parts crafting
@@ -251,7 +503,59 @@ end)
 -- start revlover crafting
 RegisterNetEvent('rsg-weaponsmith:client:startrevlovercrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.RevloverCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-parts', 'Crafting a '..lable, crafttime, false, true, {
+    QRCore.Functions.Progressbar('craft-revlover', 'Crafting a '..lable, crafttime, false, true, {
+        disableMovement = true,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', craftitems, receive)
+    end)
+end)
+
+-- start pistol crafting
+RegisterNetEvent('rsg-weaponsmith:client:startpistolcrafting', function(name, lable, item, crafttime, receive)
+    local craftitems = Config.PistolCrafting[item].craftitems
+    QRCore.Functions.Progressbar('craft-pistol', 'Crafting a '..lable, crafttime, false, true, {
+        disableMovement = true,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', craftitems, receive)
+    end)
+end)
+
+-- start repeater crafting
+RegisterNetEvent('rsg-weaponsmith:client:startrepeatercrafting', function(name, lable, item, crafttime, receive)
+    local craftitems = Config.RepeaterCrafting[item].craftitems
+    QRCore.Functions.Progressbar('craft-repeater', 'Crafting a '..lable, crafttime, false, true, {
+        disableMovement = true,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', craftitems, receive)
+    end)
+end)
+
+-- start rifle crafting
+RegisterNetEvent('rsg-weaponsmith:client:startriflecrafting', function(name, lable, item, crafttime, receive)
+    local craftitems = Config.RifleCrafting[item].craftitems
+    QRCore.Functions.Progressbar('craft-rifle', 'Crafting a '..lable, crafttime, false, true, {
+        disableMovement = true,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', craftitems, receive)
+    end)
+end)
+
+-- start shotgun crafting
+RegisterNetEvent('rsg-weaponsmith:client:startshotguncrafting', function(name, lable, item, crafttime, receive)
+    local craftitems = Config.ShotgunCrafting[item].craftitems
+    QRCore.Functions.Progressbar('craft-shotgun', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
