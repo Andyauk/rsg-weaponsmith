@@ -579,3 +579,47 @@ RegisterNetEvent('rsg-weaponsmith:client:storage', function(location)
 end)
 
 -----------------------------------------------------------------------------------
+
+-- clean/inspect weapon
+RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
+    local job = QRCore.Functions.GetPlayerData().job.name
+    if job == Config.JobRequired then
+        local ped = PlayerPedId()
+        local cloth = CreateObject(`s_balledragcloth01x`, GetEntityCoords(PlayerPedId()), false, true, false, false, true)
+        local PropId = `CLOTH`
+        local actshort = `SHORTARM_CLEAN_ENTER`
+        local actlong = `LONGARM_CLEAN_ENTER`
+        local retval, weaponHash = GetCurrentPedWeapon(PlayerPedId(), false, weaponHash, false)
+        local model = GetWeapontypeGroup(weaponHash)
+        local object = GetObjectIndexFromEntityIndex(GetCurrentPedWeaponEntityIndex(PlayerPedId(), 0))
+        if Config.Debug == true then
+            print("Weapon Group --> "..model)
+            print("Weapon Hash --> "..weaponHash)        
+        end
+        if weaponHash ~= `WEAPON_UNARMED` then
+            if model == 416676503 or model == -1101297303 then
+                Citizen.InvokeNative(0x72F52AA2D2B172CC,  PlayerPedId(), "", cloth, PropId, actshort, 1, 0, -1.0) -- TaskItemInteraction_2
+                Wait(15000)
+                Citizen.InvokeNative(0xA7A57E89E965D839, object, 0.0, false) -- SetWeaponDegradation
+                Citizen.InvokeNative(0xE22060121602493B, object, 0.0, false) -- SetWeaponDamage
+                Citizen.InvokeNative(0x812CE61DEBCAB948, object, 0.0, false) -- SetWeaponDirt
+                Citizen.InvokeNative(0xA9EF4AD10BDDDB57, object, 0.0, false) -- SetWeaponSoot
+                QRCore.Functions.Notify('weapon cleaned', 'success')
+            else
+                Citizen.InvokeNative(0x72F52AA2D2B172CC,  PlayerPedId(), "", cloth, PropId, actlong, 1, 0, -1.0) -- TaskItemInteraction_2 
+                Wait(15000)
+                Citizen.InvokeNative(0xA7A57E89E965D839, object, 0.0, false) -- SetWeaponDegradation
+                Citizen.InvokeNative(0xE22060121602493B, object, 0.0, false) -- SetWeaponDamage
+                Citizen.InvokeNative(0x812CE61DEBCAB948, object, 0.0, false) -- SetWeaponDirt
+                Citizen.InvokeNative(0xA9EF4AD10BDDDB57, object, 0.0, false) -- SetWeaponSoot
+                QRCore.Functions.Notify('weapon cleaned', 'success')
+            end
+        else
+            QRCore.Functions.Notify('you must be holding the weapon!', 'error')
+        end
+    else
+        QRCore.Functions.Notify('you are not a Weaponsmith!', 'error')
+    end
+end)
+
+-----------------------------------------------------------------------------------

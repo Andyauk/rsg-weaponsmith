@@ -1,5 +1,16 @@
 local QRCore = exports['qr-core']:GetCoreObject()
 
+-----------------------------------------------------------------------------------
+
+-- use cleankit
+QRCore.Functions.CreateUseableItem("cleankit", function(source, item)
+    local src = source
+    local Player = QRCore.Functions.GetPlayer(src)
+    TriggerClientEvent('rsg-weaponsmith:client:serviceweapon', src, 'cleankit', 1)
+end)
+
+-----------------------------------------------------------------------------------
+
 -- check player has items
 QRCore.Functions.CreateCallback('rsg-weaponsmith:server:checkitems', function(source, cb, craftitems)
     local src = source
@@ -20,6 +31,8 @@ QRCore.Functions.CreateCallback('rsg-weaponsmith:server:checkitems', function(so
     end
 end)
 
+-----------------------------------------------------------------------------------
+
 -- finish crafting
 RegisterServerEvent('rsg-weaponsmith:server:finishcrafting')
 AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(craftitems, receive)
@@ -39,3 +52,5 @@ AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(craftitems, re
     TriggerClientEvent('inventory:client:ItemBox', src, QRCore.Shared.Items[receive], "add")
     TriggerClientEvent('QRCore:Notify', src, 'crafting finished', 'success')
 end)
+
+-----------------------------------------------------------------------------------

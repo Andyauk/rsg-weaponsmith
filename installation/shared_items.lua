@@ -18,3 +18,6 @@
     ['iron']     = {['name'] = 'iron',     ['label'] = 'Iron',     ['weight'] = 100, ['type'] = 'item', ['image'] = 'iron.png',     ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['level'] = 0, ['description'] = 'crafting material'},
     ['steel']    = {['name'] = 'steel',    ['label'] = 'Steel',    ['weight'] = 100, ['type'] = 'item', ['image'] = 'steel.png',    ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['level'] = 0, ['description'] = 'crafting material'},
     ['wood']     = {['name'] = 'wood',     ['label'] = 'Wood',     ['weight'] = 100, ['type'] = 'item', ['image'] = 'wood.png',     ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['level'] = 0, ['description'] = 'crafting material'},
+
+	-- items
+    ['cleankit'] = { ['name'] = 'cleankit',  ['label'] = 'Cleaning Kit', ['weight'] = 100, ['type'] = 'item', ['image'] = 'cleankit.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['level'] = 0, ['description'] = 'for cleaning weapons'},
