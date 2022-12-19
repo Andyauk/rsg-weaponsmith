@@ -76,7 +76,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(location)
                 params = {
                     event = 'rsg-weaponsmith:client:storage',
                     isServer = false,
-                    args = { location },
+                    args = {},
                 }
             },
             {
@@ -567,20 +567,21 @@ end)
 
 -----------------------------------------------------------------------------------
 
-RegisterNetEvent('rsg-weaponsmith:client:storage', function(location)
+RegisterNetEvent('rsg-weaponsmith:client:storage', function()
     local job = QRCore.Functions.GetPlayerData().job.name
+    local stashloc = currentlocation
     if job == Config.JobRequired then
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", currentlocation, {
+        TriggerServerEvent("inventory:server:OpenInventory", "stash", stashloc, {
             maxweight = Config.StorageMaxWeight,
             slots = Config.StorageMaxSlots,
         })
-        TriggerEvent("inventory:client:SetCurrentStash", currentlocation)
+        TriggerEvent("inventory:client:SetCurrentStash", stashloc)
     end
 end)
 
 -----------------------------------------------------------------------------------
 
--- clean/inspect weapon / example code
+-- clean/inspect weapon
 RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
     local job = QRCore.Functions.GetPlayerData().job.name
     if job == Config.JobRequired then

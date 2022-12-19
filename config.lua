@@ -17,7 +17,7 @@ Config.Blip = {
 
 Config.WeaponCraftingPoint = {
     -- trapper locations
-    {name = 'Weapon Crafting', location = 'val-weaponsmith', coords = vector3(-277.2185, 779.09729, 119.50399), showblip = false, showmarker = true }, --valentine
+    {name = 'Weapon Crafting', location = 'valweaponsmith', coords = vector3(-277.2185, 779.09729, 119.50399), showblip = false, showmarker = true }, --valentine
 }
 
 Config.WeaponPartsCrafting = {
