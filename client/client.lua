@@ -580,7 +580,7 @@ end)
 
 -----------------------------------------------------------------------------------
 
--- clean/inspect weapon
+-- clean/inspect weapon / example code
 RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
     local job = QRCore.Functions.GetPlayerData().job.name
     if job == Config.JobRequired then
