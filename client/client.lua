@@ -80,6 +80,16 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(location)
                 }
             },
             {
+                header = "Job Management",
+                txt = "",
+                icon = "fas fa-user-circle",
+                params = {
+                    event = 'qr-bossmenu:client:OpenMenu',
+                    isServer = false,
+                    args = {},
+                }
+            },
+            {
                 header = ">> Close Menu <<",
                 txt = '',
                 params = {
