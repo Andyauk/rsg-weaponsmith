@@ -1,4 +1,4 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 local currentlocation
 isLoggedIn = false
 
@@ -7,7 +7,7 @@ isLoggedIn = false
 -- prompts and blips
 CreateThread(function()
     for weaponsmith, v in pairs(Config.WeaponCraftingPoint) do
-        exports['qr-core']:createPrompt(v.location, v.coords, QRCore.Shared.Keybinds['J'], 'Open ' .. v.name, {
+        exports['rsg-core']:createPrompt(v.location, v.coords, RSGCore.Shared.Keybinds['J'], 'Open ' .. v.name, {
             type = 'client',
             event = 'rsg-weaponsmith:client:mainmenu',
             args = { v.location },
@@ -26,7 +26,7 @@ CreateThread(function()
     while true do
         local sleep = 0
         if LocalPlayer.state.isLoggedIn then
-            local job = QRCore.Functions.GetPlayerData().job.name
+            local job = RSGCore.Functions.GetPlayerData().job.name
             if job == Config.JobRequired then
                 for weaponsmith, v in pairs(Config.WeaponCraftingPoint) do
                     if v.showmarker == true then
@@ -43,10 +43,10 @@ end)
 
 -- weaponsmith menu
 RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(location)
-    local job = QRCore.Functions.GetPlayerData().job.name
+    local job = RSGCore.Functions.GetPlayerData().job.name
     if job == Config.JobRequired then
         currentlocation = location
-        exports['qr-menu']:openMenu({
+        exports['rsg-menu']:openMenu({
             {
                 header = 'Weapon Crafting',
                 isMenuHeader = true,
@@ -84,7 +84,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(location)
                 txt = "",
                 icon = "fas fa-user-circle",
                 params = {
-                    event = 'qr-bossmenu:client:OpenMenu',
+                    event = 'rsg-bossmenu:client:OpenMenu',
                     isServer = false,
                     args = {},
                 }
@@ -93,12 +93,12 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(location)
                 header = ">> Close Menu <<",
                 txt = '',
                 params = {
-                    event = 'qr-menu:closeMenu',
+                    event = 'rsg-menu:closeMenu',
                 }
             },
         })
     else
-        QRCore.Functions.Notify('you are not a Weaponsmith!', 'error')
+        RSGCore.Functions.Notify('you are not a Weaponsmith!', 'error')
     end
 end)
 
@@ -136,14 +136,14 @@ RegisterNetEvent('rsg-weaponsmith:client:partsmenu', function()
             event = 'rsg-weaponsmith:client:mainmenu',
         }
     }
-    exports['qr-menu']:openMenu(partsMenu)
+    exports['rsg-menu']:openMenu(partsMenu)
 end)
 
 -- weaponsmith weapon menu
 RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
-    local job = QRCore.Functions.GetPlayerData().job.name
+    local job = RSGCore.Functions.GetPlayerData().job.name
     if job == Config.JobRequired then
-        exports['qr-menu']:openMenu({
+        exports['rsg-menu']:openMenu({
             {
                 header = 'Weapon Crafting',
                 isMenuHeader = true,
@@ -202,7 +202,7 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
             },
         })
     else
-        QRCore.Functions.Notify('you are not a Weaponsmith!', 'error')
+        RSGCore.Functions.Notify('you are not a Weaponsmith!', 'error')
     end
 end)
 
@@ -240,7 +240,7 @@ RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
             event = 'rsg-weaponsmith:client:mainmenu',
         }
     }
-    exports['qr-menu']:openMenu(revloverMenu)
+    exports['rsg-menu']:openMenu(revloverMenu)
 end)
 
 -- pistol menu
@@ -277,7 +277,7 @@ RegisterNetEvent('rsg-weaponsmith:client:pistolmenu', function()
             event = 'rsg-weaponsmith:client:mainmenu',
         }
     }
-    exports['qr-menu']:openMenu(pistolMenu)
+    exports['rsg-menu']:openMenu(pistolMenu)
 end)
 
 -- repeater menu
@@ -314,7 +314,7 @@ RegisterNetEvent('rsg-weaponsmith:client:repeatermenu', function()
             event = 'rsg-weaponsmith:client:mainmenu',
         }
     }
-    exports['qr-menu']:openMenu(repeaterMenu)
+    exports['rsg-menu']:openMenu(repeaterMenu)
 end)
 
 -- rifle menu
@@ -351,7 +351,7 @@ RegisterNetEvent('rsg-weaponsmith:client:riflemenu', function()
             event = 'rsg-weaponsmith:client:mainmenu',
         }
     }
-    exports['qr-menu']:openMenu(rifleMenu)
+    exports['rsg-menu']:openMenu(rifleMenu)
 end)
 
 -- shotgun menu
@@ -388,14 +388,14 @@ RegisterNetEvent('rsg-weaponsmith:client:shotgunmenu', function()
             event = 'rsg-weaponsmith:client:mainmenu',
         }
     }
-    exports['qr-menu']:openMenu(shotgunMenu)
+    exports['rsg-menu']:openMenu(shotgunMenu)
 end)
 
 ------------------------------------------------------------------------------------------------------
 
 -- parts crafting : check player has the items
 RegisterNetEvent('rsg-weaponsmith:client:partscheckitems', function(data)
-    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    RSGCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
     if (hasRequired) then
         if Config.Debug == true then
             print("passed")
@@ -412,7 +412,7 @@ end)
 
 -- revovler crafting : check player has the items
 RegisterNetEvent('rsg-weaponsmith:client:checkrevloveritems', function(data)
-    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    RSGCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
     if (hasRequired) then
         if Config.Debug == true then
             print("passed")
@@ -429,7 +429,7 @@ end)
 
 -- pistol crafting : check player has the items
 RegisterNetEvent('rsg-weaponsmith:client:checkpistolitems', function(data)
-    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    RSGCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
     if (hasRequired) then
         if Config.Debug == true then
             print("passed")
@@ -446,7 +446,7 @@ end)
 
 -- repeater crafting : check player has the items
 RegisterNetEvent('rsg-weaponsmith:client:checkrepeateritems', function(data)
-    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    RSGCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
     if (hasRequired) then
         if Config.Debug == true then
             print("passed")
@@ -463,7 +463,7 @@ end)
 
 -- rifle crafting : check player has the items
 RegisterNetEvent('rsg-weaponsmith:client:checkrifleitems', function(data)
-    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    RSGCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
     if (hasRequired) then
         if Config.Debug == true then
             print("passed")
@@ -480,7 +480,7 @@ end)
 
 -- shotgun crafting : check player has the items
 RegisterNetEvent('rsg-weaponsmith:client:checkshotgunitems', function(data)
-    QRCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
+    RSGCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkitems', function(hasRequired)
     if (hasRequired) then
         if Config.Debug == true then
             print("passed")
@@ -500,7 +500,7 @@ end)
 -- start parts crafting
 RegisterNetEvent('rsg-weaponsmith:client:startpartscrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.WeaponPartsCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-parts', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-parts', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -513,7 +513,7 @@ end)
 -- start revlover crafting
 RegisterNetEvent('rsg-weaponsmith:client:startrevlovercrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.RevloverCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-revlover', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-revlover', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -526,7 +526,7 @@ end)
 -- start pistol crafting
 RegisterNetEvent('rsg-weaponsmith:client:startpistolcrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.PistolCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-pistol', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-pistol', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -539,7 +539,7 @@ end)
 -- start repeater crafting
 RegisterNetEvent('rsg-weaponsmith:client:startrepeatercrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.RepeaterCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-repeater', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-repeater', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -552,7 +552,7 @@ end)
 -- start rifle crafting
 RegisterNetEvent('rsg-weaponsmith:client:startriflecrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.RifleCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-rifle', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-rifle', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -565,7 +565,7 @@ end)
 -- start shotgun crafting
 RegisterNetEvent('rsg-weaponsmith:client:startshotguncrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.ShotgunCrafting[item].craftitems
-    QRCore.Functions.Progressbar('craft-shotgun', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-shotgun', 'Crafting a '..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -578,7 +578,7 @@ end)
 -----------------------------------------------------------------------------------
 
 RegisterNetEvent('rsg-weaponsmith:client:storage', function()
-    local job = QRCore.Functions.GetPlayerData().job.name
+    local job = RSGCore.Functions.GetPlayerData().job.name
     local stashloc = currentlocation
     if job == Config.JobRequired then
         TriggerServerEvent("inventory:server:OpenInventory", "stash", stashloc, {
@@ -593,7 +593,7 @@ end)
 
 -- clean/inspect weapon
 RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
-    local job = QRCore.Functions.GetPlayerData().job.name
+    local job = RSGCore.Functions.GetPlayerData().job.name
     if job == Config.JobRequired then
         local ped = PlayerPedId()
         local cloth = CreateObject(`s_balledragcloth01x`, GetEntityCoords(PlayerPedId()), false, true, false, false, true)
@@ -615,7 +615,7 @@ RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
                 Citizen.InvokeNative(0xE22060121602493B, object, 0.0, false) -- SetWeaponDamage
                 Citizen.InvokeNative(0x812CE61DEBCAB948, object, 0.0, false) -- SetWeaponDirt
                 Citizen.InvokeNative(0xA9EF4AD10BDDDB57, object, 0.0, false) -- SetWeaponSoot
-                QRCore.Functions.Notify('weapon cleaned', 'success')
+                RSGCore.Functions.Notify('weapon cleaned', 'success')
             else
                 Citizen.InvokeNative(0x72F52AA2D2B172CC,  PlayerPedId(), "", cloth, PropId, actlong, 1, 0, -1.0) -- TaskItemInteraction_2 
                 Wait(15000)
@@ -623,13 +623,13 @@ RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
                 Citizen.InvokeNative(0xE22060121602493B, object, 0.0, false) -- SetWeaponDamage
                 Citizen.InvokeNative(0x812CE61DEBCAB948, object, 0.0, false) -- SetWeaponDirt
                 Citizen.InvokeNative(0xA9EF4AD10BDDDB57, object, 0.0, false) -- SetWeaponSoot
-                QRCore.Functions.Notify('weapon cleaned', 'success')
+                RSGCore.Functions.Notify('weapon cleaned', 'success')
             end
         else
-            QRCore.Functions.Notify('you must be holding the weapon!', 'error')
+            RSGCore.Functions.Notify('you must be holding the weapon!', 'error')
         end
     else
-        QRCore.Functions.Notify('you are not a Weaponsmith!', 'error')
+        RSGCore.Functions.Notify('you are not a Weaponsmith!', 'error')
     end
 end)
 
