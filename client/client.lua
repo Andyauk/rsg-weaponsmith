@@ -1,16 +1,36 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
-local currentlocation
-isLoggedIn = false
+local isLoggedIn = false
+local PlayerData = {}
+local currentjob
+local jobaccess
+
+-----------------------------------------------------------------------------------
+
+AddEventHandler('RSGCore:Client:OnPlayerLoaded', function()
+    isLoggedIn = true
+    PlayerData = RSGCore.Functions.GetPlayerData()
+    currentjob = PlayerData.job.name
+end)
+
+RegisterNetEvent('RSGCore:Client:OnPlayerUnload', function()
+    isLoggedIn = false
+    PlayerData = {}
+end)
+
+RegisterNetEvent('RSGCore:Client:OnJobUpdate', function(JobInfo)
+    PlayerData.job = JobInfo
+    currentjob = PlayerData.job.name
+end)
 
 -----------------------------------------------------------------------------------
 
 -- prompts and blips
 CreateThread(function()
     for weaponsmith, v in pairs(Config.WeaponCraftingPoint) do
-        exports['rsg-core']:createPrompt(v.location, v.coords, RSGCore.Shared.Keybinds['J'], 'Open ' .. v.name, {
+        exports['rsg-core']:createPrompt(v.prompt, v.coords, RSGCore.Shared.Keybinds['J'], 'Open ' .. v.name, {
             type = 'client',
             event = 'rsg-weaponsmith:client:mainmenu',
-            args = { v.location },
+            args = { v.job },
         })
         if v.showblip == true then
             local WeaponSmithBlip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.coords)
@@ -18,16 +38,15 @@ CreateThread(function()
             SetBlipScale(WeaponSmithBlip, Config.Blip.blipScale)
             Citizen.InvokeNative(0x9CB1A1623062F402, WeaponSmithBlip, Config.Blip.blipName)
         end
+
     end
 end)
 
 -----------------------------------------------------------------------------------
 
 -- weaponsmith menu
-RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(location)
-    local job = RSGCore.Functions.GetPlayerData().job.name
-    if job == Config.JobRequired then
-        currentlocation = location
+RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(jobaccess)
+    if currentjob == jobaccess then
         exports['rsg-menu']:openMenu({
             {
                 header = 'Weapon Crafting',
@@ -80,7 +99,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(location)
             },
         })
     else
-        RSGCore.Functions.Notify('you are not a Weaponsmith!', 'error')
+        RSGCore.Functions.Notify('you are not authorised!', 'error')
     end
 end)
 
@@ -112,10 +131,10 @@ RegisterNetEvent('rsg-weaponsmith:client:partsmenu', function()
         }
     end
     partsMenu[#partsMenu + 1] = {
-        header = "<< Back",
+        header = ">> Close Menu <<",
         txt = '',
         params = {
-            event = 'rsg-weaponsmith:client:mainmenu',
+            event = 'rsg-menu:closeMenu',
         }
     }
     exports['rsg-menu']:openMenu(partsMenu)
@@ -123,69 +142,64 @@ end)
 
 -- weaponsmith weapon menu
 RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
-    local job = RSGCore.Functions.GetPlayerData().job.name
-    if job == Config.JobRequired then
-        exports['rsg-menu']:openMenu({
-            {
-                header = 'Weapon Crafting',
-                isMenuHeader = true,
-            },
-            {
-                header = "Revolver Crafting",
-                txt = "",
-                icon = "fas fa-tools",
-                params = {
-                    event = 'rsg-weaponsmith:client:revlovermenu',
-                    isServer = false,
-                }
-            },
-            {
-                header = "Pistol Crafting",
-                txt = "",
-                icon = "fas fa-tools",
-                params = {
-                    event = 'rsg-weaponsmith:client:pistolmenu',
-                    isServer = false,
-                }
-            },
-            {
-                header = "Repeater Crafting",
-                txt = "",
-                icon = "fas fa-tools",
-                params = {
-                    event = 'rsg-weaponsmith:client:repeatermenu',
-                    isServer = false,
-                }
-            },
-            {
-                header = "Rifle Crafting",
-                txt = "",
-                icon = "fas fa-tools",
-                params = {
-                    event = 'rsg-weaponsmith:client:riflemenu',
-                    isServer = false,
-                }
-            },
-            {
-                header = "Shotgun Crafting",
-                txt = "",
-                icon = "fas fa-tools",
-                params = {
-                    event = 'rsg-weaponsmith:client:shotgunmenu',
-                    isServer = false,
-                }
-            },
-            {
-                header = "<< Back",
-                txt = '',
-                params = {
-                    event = 'rsg-weaponsmith:client:mainmenu',
-                }
-            },
-        })
-    else
-        RSGCore.Functions.Notify('you are not a Weaponsmith!', 'error')
-    end
+    exports['rsg-menu']:openMenu({
+        {
+            header = 'Weapon Crafting',
+            isMenuHeader = true,
+        },
+        {
+            header = "Revolver Crafting",
+            txt = "",
+            icon = "fas fa-tools",
+            params = {
+                event = 'rsg-weaponsmith:client:revlovermenu',
+                isServer = false,
+            }
+        },
+        {
+            header = "Pistol Crafting",
+            txt = "",
+            icon = "fas fa-tools",
+            params = {
+                event = 'rsg-weaponsmith:client:pistolmenu',
+                isServer = false,
+            }
+        },
+        {
+            header = "Repeater Crafting",
+            txt = "",
+            icon = "fas fa-tools",
+            params = {
+                event = 'rsg-weaponsmith:client:repeatermenu',
+                isServer = false,
+            }
+        },
+        {
+            header = "Rifle Crafting",
+            txt = "",
+            icon = "fas fa-tools",
+            params = {
+                event = 'rsg-weaponsmith:client:riflemenu',
+                isServer = false,
+            }
+        },
+        {
+            header = "Shotgun Crafting",
+            txt = "",
+            icon = "fas fa-tools",
+            params = {
+                event = 'rsg-weaponsmith:client:shotgunmenu',
+                isServer = false,
+            }
+        },
+        {
+            header = ">> Close Menu <<",
+            txt = '',
+            params = {
+                event = 'rsg-menu:closeMenu',
+            }
+        },
+    })
 end)
 
 -- revlover menu
@@ -216,10 +230,10 @@ RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
         }
     end
     revloverMenu[#revloverMenu + 1] = {
-        header = "<< Back",
+        header = ">> Close Menu <<",
         txt = '',
         params = {
-            event = 'rsg-weaponsmith:client:mainmenu',
+            event = 'rsg-menu:closeMenu',
         }
     }
     exports['rsg-menu']:openMenu(revloverMenu)
@@ -253,10 +267,10 @@ RegisterNetEvent('rsg-weaponsmith:client:pistolmenu', function()
         }
     end
     pistolMenu[#pistolMenu + 1] = {
-        header = "<< Back",
+        header = ">> Close Menu <<",
         txt = '',
         params = {
-            event = 'rsg-weaponsmith:client:mainmenu',
+            event = 'rsg-menu:closeMenu',
         }
     }
     exports['rsg-menu']:openMenu(pistolMenu)
@@ -290,10 +304,10 @@ RegisterNetEvent('rsg-weaponsmith:client:repeatermenu', function()
         }
     end
     repeaterMenu[#repeaterMenu + 1] = {
-        header = "<< Back",
+        header = ">> Close Menu <<",
         txt = '',
         params = {
-            event = 'rsg-weaponsmith:client:mainmenu',
+            event = 'rsg-menu:closeMenu',
         }
     }
     exports['rsg-menu']:openMenu(repeaterMenu)
@@ -327,10 +341,10 @@ RegisterNetEvent('rsg-weaponsmith:client:riflemenu', function()
         }
     end
     rifleMenu[#rifleMenu + 1] = {
-        header = "<< Back",
+        header = ">> Close Menu <<",
         txt = '',
         params = {
-            event = 'rsg-weaponsmith:client:mainmenu',
+            event = 'rsg-menu:closeMenu',
         }
     }
     exports['rsg-menu']:openMenu(rifleMenu)
@@ -364,10 +378,10 @@ RegisterNetEvent('rsg-weaponsmith:client:shotgunmenu', function()
         }
     end
     shotgunMenu[#shotgunMenu + 1] = {
-        header = "<< Back",
+        header = ">> Close Menu <<",
         txt = '',
         params = {
-            event = 'rsg-weaponsmith:client:mainmenu',
+            event = 'rsg-menu:closeMenu',
         }
     }
     exports['rsg-menu']:openMenu(shotgunMenu)
@@ -560,14 +574,13 @@ end)
 -----------------------------------------------------------------------------------
 
 RegisterNetEvent('rsg-weaponsmith:client:storage', function()
-    local job = RSGCore.Functions.GetPlayerData().job.name
-    local stashloc = currentlocation
-    if job == Config.JobRequired then
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", stashloc, {
+    local playerjob = PlayerData.job.name
+    if playerjob == currentjob then
+        TriggerServerEvent("inventory:server:OpenInventory", "stash", currentjob, {
             maxweight = Config.StorageMaxWeight,
             slots = Config.StorageMaxSlots,
         })
-        TriggerEvent("inventory:client:SetCurrentStash", stashloc)
+        TriggerEvent("inventory:client:SetCurrentStash", currentjob)
     end
 end)
 
@@ -575,8 +588,8 @@ end)
 
 -- clean/inspect weapon
 RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
-    local job = RSGCore.Functions.GetPlayerData().job.name
-    if job == Config.JobRequired then
+    local playerjob = PlayerData.job.name
+    if playerjob == currentjob then
         local ped = PlayerPedId()
         local cloth = CreateObject(`s_balledragcloth01x`, GetEntityCoords(PlayerPedId()), false, true, false, false, true)
         local PropId = `CLOTH`
@@ -611,7 +624,7 @@ RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
             RSGCore.Functions.Notify('you must be holding the weapon!', 'error')
         end
     else
-        RSGCore.Functions.Notify('you are not a Weaponsmith!', 'error')
+        RSGCore.Functions.Notify('you are not authorised!', 'error')
     end
 end)
 

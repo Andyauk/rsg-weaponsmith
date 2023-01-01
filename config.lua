@@ -4,7 +4,6 @@ Config = {}
 Config.Debug = false
 
 -- settings
-Config.JobRequired = 'weaponsmith'
 Config.StorageMaxWeight = 4000000
 Config.StorageMaxSlots = 48
 
@@ -16,8 +15,24 @@ Config.Blip = {
 }
 
 Config.WeaponCraftingPoint = {
-    -- trapper locations
-    {name = 'Weapon Crafting', location = 'valweaponsmith', coords = vector3(-277.2185, 779.09729, 119.50399), showblip = false, showmarker = true }, --valentine
+
+    {   -- valentine
+        name = 'Valentine Weapon Crafting', 
+        prompt = 'weaponsmith-1',
+        job = 'valweaponsmith',
+        coords = vector3(-277.2185, 779.09729, 119.50399), 
+        showblip = false, 
+        showmarker = true
+    },
+    {   -- rhodes
+        name = 'Rhodes Weapon Crafting', 
+        prompt = 'weaponsmith-2',
+        job = 'rhoweaponsmith',
+        coords = vector3(1327.1809, -1322.01, 77.888885), 
+        showblip = false, 
+        showmarker = true
+    },
+
 }
 
 Config.WeaponPartsCrafting = {
