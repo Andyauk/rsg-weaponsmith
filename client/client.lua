@@ -27,7 +27,7 @@ end)
 -- prompts and blips
 CreateThread(function()
     for weaponsmith, v in pairs(Config.WeaponCraftingPoint) do
-        exports['rsg-core']:createPrompt(v.prompt, v.coords, RSGCore.Shared.Keybinds['J'], 'Open ' .. v.name, {
+        exports['rsg-core']:createPrompt(v.prompt, v.coords, RSGCore.Shared.Keybinds['J'], Lang:t('menu.open') .. v.name, {
             type = 'client',
             event = 'rsg-weaponsmith:client:mainmenu',
             args = { v.job },
@@ -49,11 +49,11 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(jobaccess)
     if currentjob == jobaccess then
         exports['rsg-menu']:openMenu({
             {
-                header = 'Weapon Crafting',
+                header =  Lang:t('menu.weapon_crafting'),
                 isMenuHeader = true,
             },
             {
-                header = "Weapon Parts Crafting",
+                header = Lang:t('menu.weapon_parts_crafting'),
                 txt = "",
                 icon = "fas fa-tools",
                 params = {
@@ -62,7 +62,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(jobaccess)
                 }
             },
             {
-                header = "Weapon Crafting",
+                header = Lang:t('menu.weapon_crafting'),
                 txt = "",
                 icon = "fas fa-tools",
                 params = {
@@ -71,7 +71,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(jobaccess)
                 }
             },
             {
-                header = "Weaponsmith Storage",
+                header = Lang:t('menu.weaponsmith_storage'),
                 txt = "",
                 icon = "fas fa-box",
                 params = {
@@ -81,7 +81,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(jobaccess)
                 }
             },
             {
-                header = "Job Management",
+                header = Lang:t('menu.job_management'),
                 txt = "",
                 icon = "fas fa-user-circle",
                 params = {
@@ -91,7 +91,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(jobaccess)
                 }
             },
             {
-                header = ">> Close Menu <<",
+                header = Lang:t('menu.close_menu'),
                 txt = '',
                 params = {
                     event = 'rsg-menu:closeMenu',
@@ -99,7 +99,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(jobaccess)
             },
         })
     else
-        RSGCore.Functions.Notify('you are not authorised!', 'error')
+        RSGCore.Functions.Notify(Lang:t('error.you_are_not_authorised'), 'error')
     end
 end)
 
@@ -108,7 +108,7 @@ RegisterNetEvent('rsg-weaponsmith:client:partsmenu', function()
     partsMenu = {}
     partsMenu = {
         {
-            header = "Weapon Parts Crafting",
+            header = Lang:t('menu.weapon_parts_crafting'),
             isMenuHeader = true,
         },
     }
@@ -131,7 +131,7 @@ RegisterNetEvent('rsg-weaponsmith:client:partsmenu', function()
         }
     end
     partsMenu[#partsMenu + 1] = {
-        header = ">> Close Menu <<",
+        header = Lang:t('menu.close_menu'),
         txt = '',
         params = {
             event = 'rsg-menu:closeMenu',
@@ -144,11 +144,11 @@ end)
 RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
     exports['rsg-menu']:openMenu({
         {
-            header = 'Weapon Crafting',
+            header = Lang:t('menu.weapon_crafting'),
             isMenuHeader = true,
         },
         {
-            header = "Revolver Crafting",
+            header = Lang:t('menu.revolver_crafting'),
             txt = "",
             icon = "fas fa-tools",
             params = {
@@ -157,7 +157,7 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
             }
         },
         {
-            header = "Pistol Crafting",
+            header = Lang:t('menu.pistol_crafting'),
             txt = "",
             icon = "fas fa-tools",
             params = {
@@ -166,7 +166,7 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
             }
         },
         {
-            header = "Repeater Crafting",
+            header = Lang:t('menu.repeater_crafting'),
             txt = "",
             icon = "fas fa-tools",
             params = {
@@ -175,7 +175,7 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
             }
         },
         {
-            header = "Rifle Crafting",
+            header = Lang:t('menu.rifle_crafting'),
             txt = "",
             icon = "fas fa-tools",
             params = {
@@ -184,7 +184,7 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
             }
         },
         {
-            header = "Shotgun Crafting",
+            header = Lang:t('menu.shotgun_crafting'),
             txt = "",
             icon = "fas fa-tools",
             params = {
@@ -193,7 +193,7 @@ RegisterNetEvent('rsg-weaponsmith:client:weaponmenu', function()
             }
         },
         {
-            header = ">> Close Menu <<",
+            header = Lang:t('menu.close_menu'),
             txt = '',
             params = {
                 event = 'rsg-menu:closeMenu',
@@ -207,7 +207,7 @@ RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
     revloverMenu = {}
     revloverMenu = {
         {
-            header = "Revolver Crafting",
+            header = Lang:t('menu.revolver_crafting'),
             isMenuHeader = true,
         },
     }
@@ -230,7 +230,7 @@ RegisterNetEvent('rsg-weaponsmith:client:revlovermenu', function()
         }
     end
     revloverMenu[#revloverMenu + 1] = {
-        header = ">> Close Menu <<",
+        header = Lang:t('menu.close_menu'),
         txt = '',
         params = {
             event = 'rsg-menu:closeMenu',
@@ -244,7 +244,7 @@ RegisterNetEvent('rsg-weaponsmith:client:pistolmenu', function()
     pistolMenu = {}
     pistolMenu = {
         {
-            header = "Pistol Crafting",
+            header =Lang:t('menu.pistol_crafting'),
             isMenuHeader = true,
         },
     }
@@ -267,7 +267,7 @@ RegisterNetEvent('rsg-weaponsmith:client:pistolmenu', function()
         }
     end
     pistolMenu[#pistolMenu + 1] = {
-        header = ">> Close Menu <<",
+        header = Lang:t('menu.close_menu'),
         txt = '',
         params = {
             event = 'rsg-menu:closeMenu',
@@ -281,7 +281,7 @@ RegisterNetEvent('rsg-weaponsmith:client:repeatermenu', function()
     repeaterMenu = {}
     repeaterMenu = {
         {
-            header = "Repeater Crafting",
+            header = Lang:t('menu.repeater_crafting'),
             isMenuHeader = true,
         },
     }
@@ -304,7 +304,7 @@ RegisterNetEvent('rsg-weaponsmith:client:repeatermenu', function()
         }
     end
     repeaterMenu[#repeaterMenu + 1] = {
-        header = ">> Close Menu <<",
+        header = Lang:t('menu.close_menu'),
         txt = '',
         params = {
             event = 'rsg-menu:closeMenu',
@@ -318,7 +318,7 @@ RegisterNetEvent('rsg-weaponsmith:client:riflemenu', function()
     rifleMenu = {}
     rifleMenu = {
         {
-            header = "Rifle Crafting",
+            header = Lang:t('menu.rifle_crafting'),
             isMenuHeader = true,
         },
     }
@@ -341,7 +341,7 @@ RegisterNetEvent('rsg-weaponsmith:client:riflemenu', function()
         }
     end
     rifleMenu[#rifleMenu + 1] = {
-        header = ">> Close Menu <<",
+        header = Lang:t('menu.close_menu'),
         txt = '',
         params = {
             event = 'rsg-menu:closeMenu',
@@ -355,7 +355,7 @@ RegisterNetEvent('rsg-weaponsmith:client:shotgunmenu', function()
     shotgunMenu = {}
     shotgunMenu = {
         {
-            header = "Shotgun Crafting",
+            header = Lang:t('menu.shotgun_crafting'),
             isMenuHeader = true,
         },
     }
@@ -378,7 +378,7 @@ RegisterNetEvent('rsg-weaponsmith:client:shotgunmenu', function()
         }
     end
     shotgunMenu[#shotgunMenu + 1] = {
-        header = ">> Close Menu <<",
+        header = Lang:t('menu.close_menu'),
         txt = '',
         params = {
             event = 'rsg-menu:closeMenu',
@@ -496,7 +496,7 @@ end)
 -- start parts crafting
 RegisterNetEvent('rsg-weaponsmith:client:startpartscrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.WeaponPartsCrafting[item].craftitems
-    RSGCore.Functions.Progressbar('craft-parts', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-parts', Lang:t('progressbar.crafting_a')..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -509,7 +509,7 @@ end)
 -- start revlover crafting
 RegisterNetEvent('rsg-weaponsmith:client:startrevlovercrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.RevloverCrafting[item].craftitems
-    RSGCore.Functions.Progressbar('craft-revlover', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-revlover', Lang:t('progressbar.crafting_a')..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -522,7 +522,7 @@ end)
 -- start pistol crafting
 RegisterNetEvent('rsg-weaponsmith:client:startpistolcrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.PistolCrafting[item].craftitems
-    RSGCore.Functions.Progressbar('craft-pistol', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-pistol', Lang:t('progressbar.crafting_a')..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -535,7 +535,7 @@ end)
 -- start repeater crafting
 RegisterNetEvent('rsg-weaponsmith:client:startrepeatercrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.RepeaterCrafting[item].craftitems
-    RSGCore.Functions.Progressbar('craft-repeater', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-repeater', Lang:t('progressbar.crafting_a')..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -548,7 +548,7 @@ end)
 -- start rifle crafting
 RegisterNetEvent('rsg-weaponsmith:client:startriflecrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.RifleCrafting[item].craftitems
-    RSGCore.Functions.Progressbar('craft-rifle', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-rifle', Lang:t('progressbar.crafting_a')..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -561,7 +561,7 @@ end)
 -- start shotgun crafting
 RegisterNetEvent('rsg-weaponsmith:client:startshotguncrafting', function(name, lable, item, crafttime, receive)
     local craftitems = Config.ShotgunCrafting[item].craftitems
-    RSGCore.Functions.Progressbar('craft-shotgun', 'Crafting a '..lable, crafttime, false, true, {
+    RSGCore.Functions.Progressbar('craft-shotgun', Lang:t('progressbar.crafting_a')..lable, crafttime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -610,7 +610,7 @@ RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
                 Citizen.InvokeNative(0xE22060121602493B, object, 0.0, false) -- SetWeaponDamage
                 Citizen.InvokeNative(0x812CE61DEBCAB948, object, 0.0, false) -- SetWeaponDirt
                 Citizen.InvokeNative(0xA9EF4AD10BDDDB57, object, 0.0, false) -- SetWeaponSoot
-                RSGCore.Functions.Notify('weapon cleaned', 'success')
+                RSGCore.Functions.Notify( Lang:t('success.weapon_cleaned'), 'success')
             else
                 Citizen.InvokeNative(0x72F52AA2D2B172CC,  PlayerPedId(), "", cloth, PropId, actlong, 1, 0, -1.0) -- TaskItemInteraction_2 
                 Wait(15000)
@@ -618,13 +618,13 @@ RegisterNetEvent('rsg-weaponsmith:client:serviceweapon', function(item, amount)
                 Citizen.InvokeNative(0xE22060121602493B, object, 0.0, false) -- SetWeaponDamage
                 Citizen.InvokeNative(0x812CE61DEBCAB948, object, 0.0, false) -- SetWeaponDirt
                 Citizen.InvokeNative(0xA9EF4AD10BDDDB57, object, 0.0, false) -- SetWeaponSoot
-                RSGCore.Functions.Notify('weapon cleaned', 'success')
+                RSGCore.Functions.Notify(Lang:t('success.weapon_cleaned'), 'success')
             end
         else
-            RSGCore.Functions.Notify('you must be holding the weapon!', 'error')
+            RSGCore.Functions.Notify(Lang:t('error.you_must_be_holding_weapon'), 'error')
         end
     else
-        RSGCore.Functions.Notify('you are not authorised!', 'error')
+        RSGCore.Functions.Notify(Lang:t('error.you_are_not_authorised'), 'error')
     end
 end)
 

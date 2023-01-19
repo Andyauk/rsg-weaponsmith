@@ -24,7 +24,7 @@ RSGCore.Functions.CreateCallback('rsg-weaponsmith:server:checkitems', function(s
                 cb(true)
             end
         else
-            TriggerClientEvent('RSGCore:Notify', src, 'You don\'t have the required items!', 'error')
+            TriggerClientEvent('RSGCore:Notify', src, Lang:t('error.you_dont_have_the_required_items'), 'error')
             cb(false)
             return
         end
@@ -50,7 +50,7 @@ AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(craftitems, re
     -- add items
     Player.Functions.AddItem(receive, 1)
     TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[receive], "add")
-    TriggerClientEvent('RSGCore:Notify', src, 'crafting finished', 'success')
+    TriggerClientEvent('RSGCore:Notify', src, Lang:t('success.crafting_finished'), 'success')
 end)
 
 -----------------------------------------------------------------------------------
