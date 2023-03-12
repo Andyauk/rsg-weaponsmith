@@ -430,7 +430,7 @@ RegisterNetEvent('rsg-weaponsmith:client:checkpistolitems', function(data)
         if Config.Debug == true then
             print("passed")
         end
-        TriggerEvent('rsg-weaponsmith:client:startrpistolcrafting', data.name, data.lable, data.item, tonumber(data.crafttime), data.receive)
+        TriggerEvent('rsg-weaponsmith:client:startpistolcrafting', data.name, data.lable, data.item, tonumber(data.crafttime), data.receive)
     else
         if Config.Debug == true then
             print("failed")
