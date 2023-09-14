@@ -1,5 +1,8 @@
 Config = {}
 
+-- settings
+Config.StorageMaxWeight = 4000000
+Config.StorageMaxSlots = 48
 Config.Debug = false
 Config.Keybind = 'J'
 

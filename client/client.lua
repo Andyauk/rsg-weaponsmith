@@ -55,6 +55,13 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(job)
                     event = 'rsg-weaponsmith:client:ammocraftingmenu',
                     arrow = true
                 },
+                {
+                    title = 'Weaponsmith Storage',
+                    description = 'storage for weaponsmith',
+                    icon = 'fas fa-box',
+                    event = 'rsg-weaponsmith:client:storage',
+                    arrow = true
+                },
             }
         })
         lib.showContext("weaponsmith_mainmenu")
@@ -328,6 +335,22 @@ RegisterNetEvent('rsg-weaponsmith:client:craftitem', function(title, category, i
     }, {}, {}, {}, function() -- Done
         TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', ingredients, receive, giveamount)
     end)
+end)
+
+------------------------------------------------------------------------------------------------------
+-- weaponsmith storage
+------------------------------------------------------------------------------------------------------
+
+RegisterNetEvent('rsg-weaponsmith:client:storage', function()
+    local PlayerData = RSGCore.Functions.GetPlayerData()
+    local playerjob = PlayerData.job.name
+    if playerjob == jobaccess then
+        TriggerServerEvent("inventory:server:OpenInventory", "stash", jobaccess, {
+            maxweight = Config.StorageMaxWeight,
+            slots = Config.StorageMaxSlots,
+        })
+        TriggerEvent("inventory:client:SetCurrentStash", jobaccess)
+    end
 end)
 
 ------------------------------------------------------------------------------------------------------
