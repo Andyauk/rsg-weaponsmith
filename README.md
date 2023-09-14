@@ -5,12 +5,48 @@
 
 # Dependancies
 - rsg-core
-- rsg-menu
+- ox_lib
 
 # Installation
 - ensure that the dependancies are added and started
 - add rsg-weaponsmith to your resources folder
 - adjust the config.lua as required
+
+# add to shared jobs
+```lua
+    ['valweaponsmith'] = { --valentine
+        label = 'Valentine Weaponsmith',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = {
+                name = 'Trainee',
+                payment = 25
+            },
+            ['1'] = {
+                name = 'Master',
+                isboss = true,
+                payment = 75
+            },
+        },
+    },
+    ['rhoweaponsmith'] = { -- rhodes
+        label = 'Rhodes Weaponsmith',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = {
+                name = 'Trainee',
+                payment = 25
+            },
+            ['1'] = {
+                name = 'Master',
+                isboss = true,
+                payment = 75
+            },
+        },
+    },
+```
 
 # Starting the resource
 - add the following to your server.cfg file : ensure rsg-weaponsmith

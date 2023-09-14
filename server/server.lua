@@ -1,26 +1,15 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
------------------------------------------------------------------------------------
-
--- use cleankit
-RSGCore.Functions.CreateUseableItem("cleankit", function(source, item)
-    local src = source
-    local Player = RSGCore.Functions.GetPlayer(src)
-    TriggerClientEvent('rsg-weaponsmith:client:serviceweapon', src, 'cleankit', 1)
-end)
-
------------------------------------------------------------------------------------
-
--- check player has items
-RSGCore.Functions.CreateCallback('rsg-weaponsmith:server:checkitems', function(source, cb, craftitems)
+-- check player has the ingredients
+RSGCore.Functions.CreateCallback('rsg-weaponsmith:server:checkingredients', function(source, cb, ingredients)
     local src = source
     local hasItems = false
     local icheck = 0
     local Player = RSGCore.Functions.GetPlayer(src)
-    for k, v in pairs(craftitems) do
+    for k, v in pairs(ingredients) do
         if Player.Functions.GetItemByName(v.item) and Player.Functions.GetItemByName(v.item).amount >= v.amount then
             icheck = icheck + 1
-            if icheck == #craftitems then
+            if icheck == #ingredients then
                 cb(true)
             end
         else
@@ -31,15 +20,13 @@ RSGCore.Functions.CreateCallback('rsg-weaponsmith:server:checkitems', function(s
     end
 end)
 
------------------------------------------------------------------------------------
-
 -- finish crafting
 RegisterServerEvent('rsg-weaponsmith:server:finishcrafting')
-AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(craftitems, receive)
+AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(ingredients, receive, giveamount)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
-    -- remove craftitems
-    for k, v in pairs(craftitems) do
+    -- remove ingredients
+    for k, v in pairs(ingredients) do
         if Config.Debug == true then
             print(v.item)
             print(v.amount)
@@ -47,10 +34,7 @@ AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(craftitems, re
         Player.Functions.RemoveItem(v.item, v.amount)
         TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[v.item], "remove")
     end
-    -- add items
-    Player.Functions.AddItem(receive, 1)
+    -- add crafting item
+    Player.Functions.AddItem(receive, giveamount)
     TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[receive], "add")
-    TriggerClientEvent('RSGCore:Notify', src, Lang:t('success.crafting_finished'), 'success')
 end)
-
------------------------------------------------------------------------------------

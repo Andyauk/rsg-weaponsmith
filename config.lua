@@ -1,124 +1,118 @@
 Config = {}
 
--- debug
 Config.Debug = false
+Config.Keybind = 'J'
 
--- settings
-Config.StorageMaxWeight = 4000000
-Config.StorageMaxSlots = 48
-
--- blip settings
-Config.Blip = {
-    blipName = 'Weaponsmith', -- Config.Blip.blipName
-    blipSprite = 'blip_shop_gunsmith', -- Config.Blip.blipSprite
-    blipScale = 0.2 -- Config.Blip.blipScale
-}
-
+-- weaponsmith crafting locations
 Config.WeaponCraftingPoint = {
 
-    {   -- valentine
-        name = 'Valentine Weapon Crafting', 
-        prompt = 'weaponsmith-1',
+    {	-- valentine
+        name = 'Weapon Crafting',
+        location = 'valweaponsmith',
+        coords = vector3(-277.2185, 779.09729, 119.50399),
         job = 'valweaponsmith',
-        coords = vector3(-277.2185, 779.09729, 119.50399), 
-        showblip = false, 
-        showmarker = true
+        showblip = false
     },
-    {   -- rhodes
-        name = 'Rhodes Weapon Crafting', 
-        prompt = 'weaponsmith-2',
+    {	-- rhodes
+        name = 'Weapon Crafting',
+        location = 'rhoweaponsmith',
+        coords = vector3(1327.1809, -1322.01, 77.888885),
         job = 'rhoweaponsmith',
-        coords = vector3(1327.1809, -1322.01, 77.888885), 
-        showblip = false, 
-        showmarker = true
+        showblip = false
     },
-
+	
 }
 
 Config.WeaponPartsCrafting = {
 
-    -- base weapon items
-    ['trigger'] = {
-        name = 'trigger',
-        lable = 'Trigger',
-        crafttime = 20000,
-        craftitems = {
-            [1] = { item = 'steel', amount = 1 },
+    {
+        title =  'Trigger',
+        category = 'Parts',
+        crafttime = 30000,
+        icon = 'fa-solid fa-screwdriver-wrench',
+        ingredients = { 
+            [1] = { item = "steel", amount = 1 },
         },
-        receive = 'trigger'
+        receive = "trigger",
+        giveamount = 1
     },
-    
-    ['hammer'] = {
-        name = 'hammer',
-        lable = 'Hammer',
-        crafttime = 20000,
-        craftitems = {
-            [1] = { item = 'steel', amount = 1 },
+    {
+        title =  'Hammer',
+        category = 'Parts',
+        crafttime = 30000,
+        icon = 'fa-solid fa-screwdriver-wrench',
+        ingredients = { 
+            [1] = { item = "steel", amount = 1 },
         },
-        receive = 'hammer'
+        receive = "hammer",
+        giveamount = 1
     },
-    
-    ['barrel'] = {
-        name = 'barrel',
-        lable = 'Barrel',
-        crafttime = 20000,
-        craftitems = {
-            [1] = { item = 'steel', amount = 1 },
+    {
+        title =  'Barrel',
+        category = 'Parts',
+        crafttime = 30000,
+        icon = 'fa-solid fa-screwdriver-wrench',
+        ingredients = { 
+            [1] = { item = "steel", amount = 1 },
         },
-        receive = 'barrel'
+        receive = "barrel",
+        giveamount = 1
     },
-    
-    ['spring'] = {
-        name = 'spring',
-        lable = 'Spring',
-        crafttime = 20000,
-        craftitems = {
-            [1] = { item = 'steel', amount = 1 },
+    {
+        title =  'Spring',
+        category = 'Parts',
+        crafttime = 30000,
+        icon = 'fa-solid fa-screwdriver-wrench',
+        ingredients = { 
+            [1] = { item = "steel", amount = 1 },
         },
-        receive = 'spring'
+        receive = "spring",
+        giveamount = 1
     },
-    
-    ['frame'] = {
-        name = 'frame',
-        lable = 'Frame',
-        crafttime = 20000,
-        craftitems = {
-            [1] = { item = 'steel', amount = 1 },
+    {
+        title =  'Frame',
+        category = 'Parts',
+        crafttime = 30000,
+        icon = 'fa-solid fa-screwdriver-wrench',
+        ingredients = { 
+            [1] = { item = "steel", amount = 1 },
         },
-        receive = 'frame'
+        receive = "frame",
+        giveamount = 1
+    },
+    {
+        title =  'Grip',
+        category = 'Parts',
+        crafttime = 30000,
+        icon = 'fa-solid fa-screwdriver-wrench',
+        ingredients = { 
+            [1] = { item = "steel", amount = 1 },
+        },
+        receive = "grip",
+        giveamount = 1
+    },
+    {
+        title =  'Cylinder',
+        category = 'Parts',
+        crafttime = 30000,
+        icon = 'fa-solid fa-screwdriver-wrench',
+        ingredients = { 
+            [1] = { item = "steel", amount = 1 },
+        },
+        receive = "cylinder",
+        giveamount = 1
     },
 
-    ['grip'] = {
-        name = 'grip',
-        lable = 'Grip',
-        crafttime = 20000,
-        craftitems = {
-            [1] = { item = 'steel', amount = 1 },
-            [2] = { item = 'wood', amount = 1 },
-        },
-        receive = 'grip'
-    },
-
-    ['cylinder'] = {
-        name = 'cylinder',
-        lable = 'Cylinder',
-        crafttime = 20000,
-        craftitems = {
-            [1] = { item = 'steel', amount = 1 },
-        },
-        receive = 'cylinder'
-    },
-    
 }
 
-Config.RevloverCrafting = {
-    
-    -- revlover crafting
-    ['weapon_revolver_navy'] = {
-        name = 'weapon_revolver_navy',
-        lable = 'Navy Revolver',
-        crafttime = 20000,
-        craftitems = {
+Config.WeaponCrafting = {
+
+    {
+        title =  'Cattleman',
+        category = 'Revolver',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
             [1] = { item = 'trigger',  amount = 1 },
             [2] = { item = 'hammer',   amount = 1 },
             [3] = { item = 'barrel',   amount = 1 },
@@ -126,31 +120,528 @@ Config.RevloverCrafting = {
             [5] = { item = 'grip',     amount = 1 },
             [6] = { item = 'cylinder', amount = 1 },
         },
-        receive = 'weapon_revolver_navy'
+        receive = "weapon_revolver_cattleman",
+        giveamount = 1
     },
-    
+    {
+        title =  'Cattleman Mexican',
+        category = 'Revolver',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_revolver_cattleman_mexican",
+        giveamount = 1
+    },
+    {
+        title =  'Doubleaction Gambler',
+        category = 'Revolver',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_revolver_doubleaction_gambler",
+        giveamount = 1
+    },
+    {
+        title =  'Schofield',
+        category = 'Revolver',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_revolver_schofield",
+        giveamount = 1
+    },
+    {
+        title =  'Lemat',
+        category = 'Revolver',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_revolver_lemat",
+        giveamount = 1
+    },
+    {
+        title =  'Navy',
+        category = 'Revolver',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_revolver_navy",
+        giveamount = 1
+    },
+    {
+        title =  'Navy Crossover',
+        category = 'Revolver',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_revolver_navy_crossover",
+        giveamount = 1
+    },
+    {
+        title =  'Volcanic',
+        category = 'Pistol',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_pistol_volcanic",
+        giveamount = 1
+    },
+    {
+        title =  'M1899',
+        category = 'Pistol',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_pistol_m1899",
+        giveamount = 1
+    },
+    {
+        title =  'Mauser',
+        category = 'Pistol',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_pistol_mauser",
+        giveamount = 1
+    },
+    {
+        title =  'SemiAuto',
+        category = 'Pistol',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_pistol_semiauto",
+        giveamount = 1
+    },
+    {
+        title =  'Carbine',
+        category = 'Repeater',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_repeater_carbine",
+        giveamount = 1
+    },
+    {
+        title =  'Winchester',
+        category = 'Repeater',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_repeater_winchester",
+        giveamount = 1
+    },
+    {
+        title =  'Henry',
+        category = 'Repeater',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_repeater_henry",
+        giveamount = 1
+    },
+    {
+        title =  'Evans',
+        category = 'Repeater',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_repeater_evans",
+        giveamount = 1
+    },
+    {
+        title =  'Varmint',
+        category = 'Rifle',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_rifle_varmint",
+        giveamount = 1
+    },
+    {
+        title =  'Springfield',
+        category = 'Rifle',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_rifle_springfield",
+        giveamount = 1
+    },
+    {
+        title =  'Boltaction',
+        category = 'Rifle',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_rifle_boltaction",
+        giveamount = 1
+    },
+    {
+        title =  'Elephant',
+        category = 'Rifle',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_rifle_elephant",
+        giveamount = 1
+    },
+    {
+        title =  'Double Barrel',
+        category = 'Shotgun',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_shotgun_doublebarrel",
+        giveamount = 1
+    },
+    {
+        title =  'Double Barrel Exotic',
+        category = 'Shotgun',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_shotgun_doublebarrel_exotic",
+        giveamount = 1
+    },
+    {
+        title =  'Sawedoff',
+        category = 'Shotgun',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_shotgun_sawedoff",
+        giveamount = 1
+    },
+    {
+        title =  'Semi-Auto',
+        category = 'Shotgun',
+        icon = 'fa-solid fa-gun',
+        crafttime = 30000,
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_shotgun_semiauto",
+        giveamount = 1
+    },
+    {
+        title =  'Pump',
+        category = 'Shotgun',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_shotgun_pump",
+        giveamount = 1
+    },
+    {
+        title =  'Repeating',
+        category = 'Shotgun',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_shotgun_repeating",
+        giveamount = 1
+    },
+    {
+        title =  'Rollingblock',
+        category = 'Sniperrifle',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_sniperrifle_rollingblock",
+        giveamount = 1
+    },
+    {
+        title =  'Rollingblock Exotic',
+        category = 'Sniperrifle',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_sniperrifle_rollingblock_exotic",
+        giveamount = 1
+    },
+    {
+        title =  'Carcano',
+        category = 'Sniperrifle',
+        crafttime = 30000,
+        icon = 'fa-solid fa-gun',
+        ingredients = { 
+            [1] = { item = 'trigger',  amount = 1 },
+            [2] = { item = 'hammer',   amount = 1 },
+            [3] = { item = 'barrel',   amount = 1 },
+            [4] = { item = 'frame',    amount = 1 },
+            [5] = { item = 'grip',     amount = 1 },
+            [6] = { item = 'cylinder', amount = 1 },
+        },
+        receive = "weapon_sniperrifle_carcano",
+        giveamount = 1
+    },
 }
 
-Config.PistolCrafting = {
-    
-    -- pistol crafting
+Config.WeaponAmmoCrafting = {
 
-}
-
-Config.RepeaterCrafting = {
-    
-    -- repeater crafting
-
-}
-
-Config.RifleCrafting = {
-    
-    -- rifle crafting
-
-}
-
-Config.ShotgunCrafting = {
-    
-    -- shotgun crafting
+    {
+        title =  'Repeater',
+        category = 'Ammo',
+        crafttime = 30000,
+        icon = 'fa-solid fa-person-rifle',
+        ingredients = { 
+            [1] = { item = 'copper',  amount = 1 },
+            [2] = { item = 'steel',   amount = 1 },
+        },
+        receive = "ammo_repeater",
+        giveamount = 1
+    },
+    {
+        title =  'Revolver',
+        category = 'Ammo',
+        crafttime = 30000,
+        icon = 'fa-solid fa-person-rifle',
+        ingredients = { 
+            [1] = { item = 'copper',  amount = 1 },
+            [2] = { item = 'steel',   amount = 1 },
+        },
+        receive = "ammo_revolver",
+        giveamount = 1
+    },
+    {
+        title =  'Rifle',
+        category = 'Ammo',
+        crafttime = 30000,
+        icon = 'fa-solid fa-person-rifle',
+        ingredients = { 
+            [1] = { item = 'copper',  amount = 1 },
+            [2] = { item = 'steel',   amount = 1 },
+        },
+        receive = "ammo_rifle",
+        giveamount = 1
+    },
+    {
+        title =  'Elephant Rifle',
+        category = 'Ammo',
+        crafttime = 30000,
+        icon = 'fa-solid fa-person-rifle',
+        ingredients = { 
+            [1] = { item = 'copper',  amount = 1 },
+            [2] = { item = 'steel',   amount = 1 },
+        },
+        receive = "ammo_rifle_elephant",
+        giveamount = 1
+    },
+    {
+        title =  'Pistol',
+        category = 'Ammo',
+        crafttime = 30000,
+        icon = 'fa-solid fa-person-rifle',
+        ingredients = { 
+            [1] = { item = 'copper',  amount = 1 },
+            [2] = { item = 'steel',   amount = 1 },
+        },
+        receive = "ammo_pistol",
+        giveamount = 1
+    },
+    {
+        title =  'Shotgun',
+        category = 'Ammo',
+        crafttime = 30000,
+        icon = 'fa-solid fa-person-rifle',
+        ingredients = { 
+            [1] = { item = 'copper',  amount = 1 },
+            [2] = { item = 'steel',   amount = 1 },
+        },
+        receive = "ammo_shotgun",
+        giveamount = 1
+    },
+    {
+        title =  'Varmint',
+        category = 'Ammo',
+        crafttime = 30000,
+        icon = 'fa-solid fa-person-rifle',
+        ingredients = { 
+            [1] = { item = 'copper',  amount = 1 },
+            [2] = { item = 'steel',   amount = 1 },
+        },
+        receive = "ammo_varmint",
+        giveamount = 1
+    },
 
 }
