@@ -50,3 +50,6 @@
 
 # Starting the resource
 - add the following to your server.cfg file : ensure rsg-weaponsmith
+
+# Commands
+- /inspect (used to inspect a held weapon)

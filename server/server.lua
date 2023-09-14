@@ -1,5 +1,10 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
+RSGCore.Commands.Add("inspect", 'inspect held weapon', {}, false, function(source, args)
+    local src = source
+    TriggerClientEvent("rsg-weaponsmith:client:inspectweapon", src)
+end)
+
 -- check player has the ingredients
 RSGCore.Functions.CreateCallback('rsg-weaponsmith:server:checkingredients', function(source, cb, ingredients)
     local src = source
