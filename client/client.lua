@@ -35,36 +35,36 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(job)
             title = 'Weaponsmith Menu',
             options = {
                 {
-                    title = 'Parts Crafting',
-                    description = 'craft weapon parts',
+                    title = Lang:t('label.parts_crafting'),
+                    description = Lang:t('label.parts_crafting_sub'),
                     icon = 'fa-solid fa-screwdriver-wrench',
                     event = 'rsg-weaponsmith:client:partscraftingmenu',
                     arrow = true
                 },
                 {
-                    title = 'Weapon Crafting',
-                    description = 'craft weapons',
+                    title = Lang:t('label.weapon_crafting'),
+                    description = Lang:t('label.weapon_crafting_sub',
                     icon = 'fa-solid fa-gun',
                     event = 'rsg-weaponsmith:client:weaponcraftingmenu',
                     arrow = true
                 },
                 {
-                    title = 'Ammo Crafting',
-                    description = 'craft weapon ammo',
+                    title = Lang:t('label.ammo_crafting'),
+                    description = Lang:t('label.ammo_crafting_sub'),
                     icon = 'fa-solid fa-person-rifle',
                     event = 'rsg-weaponsmith:client:ammocraftingmenu',
                     arrow = true
                 },
                 {
-                    title = 'Weaponsmith Storage',
-                    description = 'storage for weaponsmith',
+                    title = Lang:t('label.weapon_storage'),
+                    description = Lang:t('label.weapon_storage_sub'),
                     icon = 'fas fa-box',
                     event = 'rsg-weaponsmith:client:storage',
                     arrow = true
                 },
                 {
-                    title = 'Repair Held Weapon',
-                    description = 'repair the weapon you are holding',
+                    title = Lang:t('label.repair_weapon'),
+                    description = Lang:t('label.repair_weapon_sub'),
                     icon = 'fa-solid fa-hammer',
                     event = 'rsg-weapons:client:repairweapon',
                     arrow = true
@@ -135,7 +135,7 @@ AddEventHandler('rsg-weaponsmith:client:partscraftingmenu', function()
     -- show main menu with categories
     local partsMenu = {
         id = 'partscrafting_menu',
-        title = 'Parts Crafting',
+        title = Lang:t('label.parts_crafting'),
         menu = 'weaponsmith_mainmenu',
         onBack = function() end,
         options = {}
@@ -144,7 +144,7 @@ AddEventHandler('rsg-weaponsmith:client:partscraftingmenu', function()
     for category, partsMenuData in pairs(partsCategoryMenus) do
         table.insert(partsMenu.options, {
             title = category,
-            description = 'Explore the crafing options for ' .. category,
+            description = Lang:t('label.explore_options') .. category,
             icon = 'fa-solid fa-pen-ruler',
             event = 'rsg-weaponsmith:client:' .. category,
             arrow = true
@@ -213,7 +213,7 @@ AddEventHandler('rsg-weaponsmith:client:weaponcraftingmenu', function()
     -- show main menu with categories
     local weaponMenu = {
         id = 'weaponcrafting_menu',
-        title = 'Weapon Crafting',
+        title = Lang:t('label.weapon_crafting'),
         menu = 'weaponsmith_mainmenu',
         onBack = function() end,
         options = {}
@@ -222,7 +222,7 @@ AddEventHandler('rsg-weaponsmith:client:weaponcraftingmenu', function()
     for category, weaponMenuData in pairs(weaponCategoryMenus) do
         table.insert(weaponMenu.options, {
             title = category,
-            description = 'Explore the crafing options for ' .. category,
+            description = Lang:t('label.explore_options') .. category,
             icon = 'fa-solid fa-pen-ruler',
             event = 'rsg-weaponsmith:client:' .. category,
             arrow = true
@@ -291,7 +291,7 @@ AddEventHandler('rsg-weaponsmith:client:ammocraftingmenu', function()
     -- show main menu with categories
     local ammoMenu = {
         id = 'ammocrafting_menu',
-        title = 'Ammo Crafting',
+        title = Lang:t('label.ammo_crafting'),
         menu = 'weaponsmith_mainmenu',
         onBack = function() end,
         options = {}
@@ -300,7 +300,7 @@ AddEventHandler('rsg-weaponsmith:client:ammocraftingmenu', function()
     for category, ammoMenuData in pairs(ammoCategoryMenus) do
         table.insert(ammoMenu.options, {
             title = category,
-            description = 'Explore the crafing options for ' .. category,
+            description = Lang:t('label.explore_options') .. category,
             icon = 'fa-solid fa-pen-ruler',
             event = 'rsg-weaponsmith:client:' .. category,
             arrow = true

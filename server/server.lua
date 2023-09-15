@@ -1,6 +1,6 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
-RSGCore.Commands.Add("inspect", 'inspect held weapon', {}, false, function(source, args)
+RSGCore.Commands.Add("inspect", Lang:t('label.inspect'), {}, false, function(source, args)
     local src = source
     TriggerClientEvent("rsg-weaponsmith:client:inspectweapon", src)
 end)
