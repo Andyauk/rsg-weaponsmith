@@ -62,6 +62,13 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(job)
                     event = 'rsg-weaponsmith:client:storage',
                     arrow = true
                 },
+                {
+                    title = 'Repair Held Weapon',
+                    description = 'repair the weapon you are holding',
+                    icon = 'fa-solid fa-hammer',
+                    event = 'rsg-weapons:client:repairweapon',
+                    arrow = true
+                },
             }
         })
         lib.showContext("weaponsmith_mainmenu")
