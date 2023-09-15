@@ -43,7 +43,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(job)
                 },
                 {
                     title = Lang:t('label.weapon_crafting'),
-                    description = Lang:t('label.weapon_crafting_sub',
+                    description = Lang:t('label.weapon_crafting_sub'),
                     icon = 'fa-solid fa-gun',
                     event = 'rsg-weaponsmith:client:weaponcraftingmenu',
                     arrow = true
