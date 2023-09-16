@@ -367,16 +367,16 @@ end)
 RegisterNetEvent('rsg-weaponsmith:client:inspectweapon', function()
     local retval, weaponHash = GetCurrentPedWeapon(PlayerPedId(), true, 0, true) 
     local interaction = "LONGARM_HOLD_ENTER"
-    local act = GetHashKey("LONGARM_CLEAN_ENTER")
+    local act = joaat("LONGARM_CLEAN_ENTER")
     local object = GetObjectIndexFromEntityIndex(GetCurrentPedWeaponEntityIndex(PlayerPedId(),0))
     local cleaning = false 
     Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), "GENERIC_WEAPON_CLEAN_PROMPT_AVAILABLE", true, -1)
     if Citizen.InvokeNative(0xD955FEE4B87AFA07,weaponHash) then
         interaction = "SHORTARM_HOLD_ENTER"
-        act = GetHashKey("SHORTARM_CLEAN_ENTER")
+        act = joaat("SHORTARM_CLEAN_ENTER")
     end
     if weaponHash ~= -1569615261 then
-        TaskItemInteraction(PlayerPedId(), weaponHash, GetHashKey(interaction), 0,0,0) 
+        TaskItemInteraction(PlayerPedId(), weaponHash, joaat(interaction), 0,0,0) 
         showstats()
         while not Citizen.InvokeNative(0xEC7E480FF8BD0BED,PlayerPedId()) do
             Wait(300)
@@ -389,8 +389,8 @@ RegisterNetEvent('rsg-weaponsmith:client:inspectweapon', function()
             end
             if IsDisabledControlJustReleased(0,3820983707) and not cleaning then
                 cleaning = true 
-                local Cloth= CreateObject(GetHashKey('s_balledragcloth01x'), GetEntityCoords(PlayerPedId()), false, true, false, false, true)
-                local PropId = GetHashKey("CLOTH")
+                local Cloth= CreateObject(joaat('s_balledragcloth01x'), GetEntityCoords(PlayerPedId()), false, true, false, false, true)
+                local PropId = joaat("CLOTH")
                 Citizen.InvokeNative(0x72F52AA2D2B172CC,  PlayerPedId(), 1242464081, Cloth, PropId, act, 1, 0, -1.0)  
                 Wait(9500) 
                 ClearPedTasks(PlayerPedId(),1,1)
@@ -407,7 +407,7 @@ end)
 function showstats()
     local _, weapon = GetCurrentPedWeapon(PlayerPedId(), true, 0, true) 
     if weapon then    
-        local uiFlowBlock = RequestFlowBlock(GetHashKey("PM_FLOW_WEAPON_INSPECT"))
+        local uiFlowBlock = RequestFlowBlock(joaat("PM_FLOW_WEAPON_INSPECT"))
         local uiContainer = DatabindingAddDataContainerFromPath("" , "ItemInspection")
         Citizen.InvokeNative(0x46DB71883EE9D5AF, uiContainer, "stats", getWeaponStats(weapon), PlayerPedId())
         DatabindingAddDataString(uiContainer, "tipText", 'Weapon Information')
@@ -423,7 +423,7 @@ end
 function getWeaponStats(weaponHash) 
     local emptyStruct = DataView.ArrayBuffer(256)
     local charStruct = DataView.ArrayBuffer(256)
-    Citizen.InvokeNative(0x886DFD3E185C8A89, 1, emptyStruct:Buffer(), GetHashKey("CHARACTER"), -1591664384, charStruct:Buffer())
+    Citizen.InvokeNative(0x886DFD3E185C8A89, 1, emptyStruct:Buffer(), joaat("CHARACTER"), -1591664384, charStruct:Buffer())
         
     local unkStruct = DataView.ArrayBuffer(256)
     Citizen.InvokeNative(0x886DFD3E185C8A89, 1, charStruct:Buffer(), 923904168, -740156546, unkStruct:Buffer())
