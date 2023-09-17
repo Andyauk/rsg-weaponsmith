@@ -23,6 +23,27 @@ Config.WeaponCraftingPoint = {
         job = 'rhoweaponsmith',
         showblip = false
     },
+    {	-- stdenis
+        name = 'Weapon Crafting',
+        location = 'stdweaponsmith',
+        coords = vector3(2710.5827, -1287.543, 49.636417),
+        job = 'stdweaponsmith',
+        showblip = false
+    },
+    {	-- tumbleweed
+        name = 'Weapon Crafting',
+        location = 'tumweaponsmith',
+        coords = vector3(-5509.137, -2968.763, -0.629789),
+        job = 'tumweaponsmith',
+        showblip = false
+    },
+    {	-- annesburg
+        name = 'Weapon Crafting',
+        location = 'annweaponsmith',
+        coords = vector3(2950.9912, 1316.7031, 44.820266),
+        job = 'annweaponsmith',
+        showblip = false
+    },
 	
 }
 
