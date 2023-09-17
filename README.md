@@ -6,11 +6,12 @@
 # Dependancies
 - rsg-core
 - ox_lib
+- rsg-weaponshop
 
 # Installation
 - ensure that the dependancies are added and started
+- add the following table to your database : rsg-weaponsmith.sql
 - add rsg-weaponsmith to your resources folder
-- adjust the config.lua as required
 
 # add to shared jobs
 ```lua

@@ -20,12 +20,13 @@ client_script {
 
 server_script {
     '@oxmysql/lib/MySQL.lua',
-	'server/server.lua'
+    'server/server.lua'
 }
 
 dependencies {
     'rsg-core',
     'ox_lib',
+    'rsg-weaponshop'
 }
 
 lua54 'yes'
