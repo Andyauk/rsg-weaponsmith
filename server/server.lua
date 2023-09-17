@@ -25,9 +25,9 @@ RSGCore.Functions.CreateCallback('rsg-weaponsmith:server:checkingredients', func
     end
 end)
 
--- finish crafting
-RegisterServerEvent('rsg-weaponsmith:server:finishcrafting')
-AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(ingredients, receive, giveamount)
+-- finish crafting parts
+RegisterServerEvent('rsg-weaponsmith:server:finishcraftingparts')
+AddEventHandler('rsg-weaponsmith:server:finishcraftingparts', function(ingredients, receive, giveamount)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
     -- remove ingredients
@@ -42,4 +42,29 @@ AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(ingredients, r
     -- add crafting item
     Player.Functions.AddItem(receive, giveamount)
     TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[receive], "add")
+end)
+
+-- finish crafting weapon / ammo
+RegisterServerEvent('rsg-weaponsmith:server:finishcrafting')
+AddEventHandler('rsg-weaponsmith:server:finishcrafting', function(ingredients, receive, giveamount, job)
+    local src = source
+    local Player = RSGCore.Functions.GetPlayer(src)
+    -- remove ingredients
+    for k, v in pairs(ingredients) do
+        if Config.Debug == true then
+            print(v.item)
+            print(v.amount)
+        end
+        Player.Functions.RemoveItem(v.item, v.amount)
+        TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[v.item], "remove")
+    end
+    -- add stock to weaponsmith
+    MySQL.query('SELECT * FROM weaponsmith_stock WHERE weaponsmith = ? AND item = ?',{job, receive} , function(result)
+        if result[1] ~= nil then
+            local stockadd = result[1].stock + giveamount
+            MySQL.update('UPDATE weaponsmith_stock SET stock = ? WHERE weaponsmith = ? AND item = ?',{stockadd, job, receive})
+        else
+            MySQL.insert('INSERT INTO weaponsmith_stock (`weaponsmith`, `item`, `stock`) VALUES (?, ?, ?);', {job, receive, giveamount})
+        end
+    end)
 end)

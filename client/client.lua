@@ -94,7 +94,7 @@ for _, v in ipairs(Config.WeaponPartsCrafting) do
     local option = {
         title = v.title,
         icon = v.icon,
-        event = 'rsg-weaponsmith:client:checkingredients',
+        event = 'rsg-weaponsmith:client:checkingredientsparts',
         metadata = partsIngredientsMetadata,
         args = {
             title = v.title,
@@ -315,7 +315,36 @@ end)
 -- do crafting stuff
 ------------------------------------------------------------------------------------------------------
 
--- check player has the ingredients to craft item
+-- check player has the ingredients to craft parts
+RegisterNetEvent('rsg-weaponsmith:client:checkingredientsparts', function(data)
+    RSGCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkingredients', function(hasRequired)
+    if (hasRequired) then
+        if Config.Debug == true then
+            print("passed")
+        end
+        TriggerEvent('rsg-weaponsmith:client:craftitemparts', data.title, data.category, data.ingredients, tonumber(data.crafttime), data.receive, data.giveamount)
+    else
+        if Config.Debug == true then
+            print("failed")
+        end
+        return
+    end
+    end, data.ingredients)
+end)
+
+-- do crafting parts
+RegisterNetEvent('rsg-weaponsmith:client:craftitemparts', function(title, category, ingredients, crafttime, receive, giveamount)
+    RSGCore.Functions.Progressbar('do-crafting', Lang:t('progressbar.crafting_a')..title..' '..category, crafttime, false, true, {
+        disableMovement = true,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent('rsg-weaponsmith:server:finishcraftingparts', ingredients, receive, giveamount, jobaccess)
+    end)
+end)
+
+-- check player has the ingredients to craft weapon / ammo
 RegisterNetEvent('rsg-weaponsmith:client:checkingredients', function(data)
     RSGCore.Functions.TriggerCallback('rsg-weaponsmith:server:checkingredients', function(hasRequired)
     if (hasRequired) then
@@ -332,7 +361,7 @@ RegisterNetEvent('rsg-weaponsmith:client:checkingredients', function(data)
     end, data.ingredients)
 end)
 
--- do crafting
+-- do crafting weapon / ammo
 RegisterNetEvent('rsg-weaponsmith:client:craftitem', function(title, category, ingredients, crafttime, receive, giveamount)
     RSGCore.Functions.Progressbar('do-crafting', Lang:t('progressbar.crafting_a')..title..' '..category, crafttime, false, true, {
         disableMovement = true,
@@ -340,7 +369,7 @@ RegisterNetEvent('rsg-weaponsmith:client:craftitem', function(title, category, i
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', ingredients, receive, giveamount)
+        TriggerServerEvent('rsg-weaponsmith:server:finishcrafting', ingredients, receive, giveamount, jobaccess)
     end)
 end)
 
