@@ -26,7 +26,8 @@ local Translations = {
       repair_weapon_sub = 'repair the weapon you are holding',
       explore_options = 'Explore the crafing options for ',
       inspect = 'inspect held weapon',
-      boss_menu = 'inspect held weapon',
+      boss_menu = 'Boss Menu',
+      boss_menu_sub = 'open boss menu',
     }
 }
 
