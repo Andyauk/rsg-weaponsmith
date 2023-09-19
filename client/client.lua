@@ -69,6 +69,13 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(job)
                     event = 'rsg-weapons:client:repairweapon',
                     arrow = true
                 },
+                {
+                    title = Lang:t('label.boss_menu'),
+                    description = 'boss menu',
+                    icon = 'fa-solid fa-user-tie',
+                    event = 'rsg-bossmenu:client:mainmenu',
+                    arrow = true
+                },
             }
         })
         lib.showContext("weaponsmith_mainmenu")
