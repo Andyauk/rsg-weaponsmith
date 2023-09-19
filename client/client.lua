@@ -71,7 +71,7 @@ RegisterNetEvent('rsg-weaponsmith:client:mainmenu', function(job)
                 },
                 {
                     title = Lang:t('label.boss_menu'),
-                    description = 'boss menu',
+                    description = Lang:t('label.boss_menu_sub'),
                     icon = 'fa-solid fa-user-tie',
                     event = 'rsg-bossmenu:client:mainmenu',
                     arrow = true
