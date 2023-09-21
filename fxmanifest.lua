@@ -15,18 +15,19 @@ shared_scripts {
 
 client_script {
     'client/client.lua',
+    'client/client_shop.lua',
     'client/dataview.lua'
 }
 
 server_script {
     '@oxmysql/lib/MySQL.lua',
-    'server/server.lua'
+    'server/server.lua',
+    'server/server_shop.lua'
 }
 
 dependencies {
     'rsg-core',
     'ox_lib',
-    'rsg-weaponshop'
 }
 
 lua54 'yes'

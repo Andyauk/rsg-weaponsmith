@@ -1,48 +1,102 @@
 Config = {}
 
+-- weaponsmith blip settings
+Config.WeaponsmithBlip = {
+    blipName = 'Weaponsmith', -- Config.Blip.blipName
+    blipSprite = 'blip_shop_gunsmith', -- Config.Blip.blipSprite
+    blipScale = 0.2 -- Config.Blip.blipScale
+}
+
+-- shop blip settings
+Config.ShopBlip = {
+    blipName = 'Weapon Shop', -- Config.Blip.blipName
+    blipSprite = 'blip_shop_store', -- Config.Blip.blipSprite
+    blipScale = 0.2 -- Config.Blip.blipScale
+}
+
 -- settings
 Config.StorageMaxWeight = 4000000
 Config.StorageMaxSlots = 48
 Config.Debug = false
 Config.Keybind = 'J'
 
+Config.WeaponShops = {
+
+    {
+        shopid = 'valweaponshop',
+        shopname = 'Valentine Weapon Shop',
+        coords = vector3(-282.5596, 780.56506, 119.52648),
+        jobaccess = 'valweaponsmith',
+        showblip = true
+    },
+    {
+        shopid = 'rhoweaponshop',
+        shopname = 'Valentine Weapon Shop',
+        coords = vector3(1322.7214, -1321.552, 77.889106),
+        jobaccess = 'rhoweaponsmith',
+        showblip = true
+    },
+    {
+        shopid = 'stdweaponshop',
+        shopname = 'Saint Denis Weapon Shop',
+        coords = vector3(2716.7294, -1285.322, 49.630462),
+        jobaccess = 'stdweaponsmith',
+        showblip = true
+    },
+    {
+        shopid = 'tumweaponshop',
+        shopname = 'Tumbleweed Weapon Shop',
+        coords = vector3(-5508.215, -2964.114, -0.629247),
+        jobaccess = 'tumweaponsmith',
+        showblip = true
+    },
+    {
+        shopid = 'annweaponshop',
+        shopname = 'Annesburg Weapon Shop',
+        coords = vector3(2946.5656, 1320.0002, 44.820243),
+        jobaccess = 'annweaponsmith',
+        showblip = true
+    },
+    
+}
+
 -- weaponsmith crafting locations
 Config.WeaponCraftingPoint = {
 
-    {	-- valentine
+    {   -- valentine
         name = 'Weapon Crafting',
         location = 'valweaponsmith',
         coords = vector3(-277.2185, 779.09729, 119.50399),
         job = 'valweaponsmith',
-        showblip = false
+        showblip = true
     },
-    {	-- rhodes
+    {   -- rhodes
         name = 'Weapon Crafting',
         location = 'rhoweaponsmith',
         coords = vector3(1327.1809, -1322.01, 77.888885),
         job = 'rhoweaponsmith',
-        showblip = false
+        showblip = true
     },
-    {	-- stdenis
+    {   -- stdenis
         name = 'Weapon Crafting',
         location = 'stdweaponsmith',
         coords = vector3(2710.5827, -1287.543, 49.636417),
         job = 'stdweaponsmith',
-        showblip = false
+        showblip = true
     },
-    {	-- tumbleweed
+    {   -- tumbleweed
         name = 'Weapon Crafting',
         location = 'tumweaponsmith',
         coords = vector3(-5509.137, -2968.763, -0.629789),
         job = 'tumweaponsmith',
-        showblip = false
+        showblip = true
     },
-    {	-- annesburg
+    {   -- annesburg
         name = 'Weapon Crafting',
         location = 'annweaponsmith',
         coords = vector3(2950.9912, 1316.7031, 44.820266),
         job = 'annweaponsmith',
-        showblip = false
+        showblip = true
     },
 	
 }

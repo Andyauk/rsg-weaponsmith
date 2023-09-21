@@ -2,21 +2,21 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 local options = {}
 local jobaccess
 
-------------------------------------------------------------------------------------------------------
-
--- crafting locations
+-------------------------------------------------------------------------------------------
+-- prompts and blips
+-------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
-    for crafting, v in pairs(Config.WeaponCraftingPoint) do
+    for _, v in pairs(Config.WeaponCraftingPoint) do
         exports['rsg-core']:createPrompt(v.location, v.coords, RSGCore.Shared.Keybinds[Config.Keybind], Lang:t('label.open_crafting_menu'), {
             type = 'client',
             event = 'rsg-weaponsmith:client:mainmenu',
             args = { v.job },
         })
         if v.showblip == true then
-            local CraftingBlip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.coords)
-            SetBlipSprite(CraftingBlip, 3535996525, 1)
-            SetBlipScale(CraftingBlip, 0.2)
-            Citizen.InvokeNative(0x9CB1A1623062F402, CraftingBlip, v.name)
+            local WeaponsmithBlip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.coords)
+            SetBlipSprite( WeaponsmithBlip, joaat(Config.WeaponsmithBlip.blipSprite), true)
+            SetBlipScale(Config.WeaponsmithBlip.blipScale, 0.2)
+            Citizen.InvokeNative(0x9CB1A1623062F402, WeaponsmithBlip, Config.WeaponsmithBlip.blipName)
         end
     end
 end)
