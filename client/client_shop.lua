@@ -198,7 +198,7 @@ RegisterNetEvent('rsg-weaponshop:client:weaponshopInvReFillInput', function(data
         return
     end
 
-    if result[k].stock >= tonumber(input[1]) and tonumber(input[2]) ~= nil then
+    if stock >= tonumber(input[1]) and tonumber(input[2]) ~= nil then
         TriggerServerEvent('rsg-weaponshop:server:weaponshopInvReFill', currentweaponshop, item, input[1], tonumber(input[2]), currentjob)
     else
         RSGCore.Functions.Notify(Lang:t('lang_s19'), 'error')
