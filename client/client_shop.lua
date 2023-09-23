@@ -197,18 +197,12 @@ RegisterNetEvent('rsg-weaponshop:client:weaponshopInvReFillInput', function(data
     if not input then
         return
     end
-    
-    RSGCore.Functions.TriggerCallback('rsg-weaponshop:server:weaponsmithStock', function(result)
-        for k, v in pairs(result) do
-            if result[k].stock >= tonumber(input[1]) and tonumber(input[2]) ~= nil then
-                --print(currentweaponshop, item, input[1], tonumber(input[2]))
-                TriggerServerEvent('rsg-weaponshop:server:weaponshopInvReFill', currentweaponshop, item, input[1], tonumber(input[2]), currentjob)
-            else
-                RSGCore.Functions.Notify(Lang:t('lang_s19'), 'error')
-            end
-            return
-        end
-    end, currentjob)
+
+	if result[k].stock >= tonumber(input[1]) and tonumber(input[2]) ~= nil then
+		TriggerServerEvent('rsg-weaponshop:server:weaponshopInvReFill', currentweaponshop, item, input[1], tonumber(input[2]), currentjob)
+	else
+		RSGCore.Functions.Notify(Lang:t('lang_s19'), 'error')
+	end
 end)
 
 -------------------------------------------------------------------------------------------
