@@ -6,7 +6,6 @@
 # Dependancies
 - rsg-core
 - ox_lib
-- rsg-weaponshop
 
 # Installation
 - ensure that the dependancies are added and started
