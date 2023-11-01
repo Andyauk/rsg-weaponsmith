@@ -1,5 +1,8 @@
 Config = {}
 
+-- Inventory Images
+Config.img = "rsg-inventory/html/images/"
+
 -- weaponsmith blip settings
 Config.WeaponsmithBlip = {
     blipName = 'Weaponsmith', -- Config.Blip.blipName
