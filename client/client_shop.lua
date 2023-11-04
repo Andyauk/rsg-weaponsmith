@@ -101,7 +101,7 @@ RegisterNetEvent("rsg-weaponshop:client:weaponshopInv", function(store_inventory
                 options[#options + 1] = {
                     title = RSGCore.Shared.Items[store_inventory[k].items].label,
                     description = 'Stock: '..store_inventory[k].stock..' | '..Lang:t('lang_s12')..string.format("%.2f", store_inventory[k].price),
-                    icon = 'fa-solid fa-box',
+                    icon = "nui://"..Config.img..RSGCore.Shared.Items[store_inventory[k].items].image,
                     event = 'rsg-weaponshop:client:weaponshopInvInput',
                     args = store_inventory[k],
                     arrow = true,
