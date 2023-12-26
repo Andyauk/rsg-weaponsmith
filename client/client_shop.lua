@@ -8,7 +8,7 @@ local isboss = nil
 -------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
     for _, v in pairs(Config.WeaponShops) do
-        exports['rsg-core']:createPrompt(v.shopid, v.coords, RSGCore.Shared.Keybinds[Config.Keybind], 'Open Weapon Shop', {
+        exports['rsg-core']:createPrompt(v.shopid, v.coords, RSGCore.Shared.Keybinds[Config.Keybind], Lang:t('label.open_weapon_shop_menu'), {
             type = 'client',
             event = 'rsg-weaponshop:client:weaponshopMenu',
             args = { v.jobaccess, v.shopid },

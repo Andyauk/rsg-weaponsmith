@@ -28,6 +28,9 @@ local Translations = {
       inspect = 'inspect held weapon',
       boss_menu = 'Boss Menu',
       boss_menu_sub = 'open boss menu',
+      weaponsmith_blip_name = 'Weaponsmith',
+      weapon_shop_blip_name = 'Weapon Shop',
+      open_weapon_shop_menu = 'Open Weapon Shop',
     },
 
     lang_s1 = 'Open Weapon Shop',
