@@ -5,14 +5,14 @@ Config.img = "rsg-inventory/html/images/"
 
 -- weaponsmith blip settings
 Config.WeaponsmithBlip = {
-    blipName = 'Weaponsmith', -- Config.Blip.blipName
+    blipName = Lang:t('label.weaponsmith_blip_name'), -- Config.Blip.blipName
     blipSprite = 'blip_shop_gunsmith', -- Config.Blip.blipSprite
     blipScale = 0.2 -- Config.Blip.blipScale
 }
 
 -- shop blip settings
 Config.ShopBlip = {
-    blipName = 'Weapon Shop', -- Config.Blip.blipName
+    blipName = Lang:t('label.weapon_shop_blip_name'),  -- Config.Blip.blipName
     blipSprite = 'blip_shop_store', -- Config.Blip.blipSprite
     blipScale = 0.2 -- Config.Blip.blipScale
 }
